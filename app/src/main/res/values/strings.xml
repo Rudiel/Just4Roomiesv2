@@ -1,0 +1,118 @@
+<resources>
+    <string name="app_name">Just4Roomies</string>
+
+    <string name="facebook_app_id">1068183313241785</string>
+
+    <string name="revisar_conexion">Por favor revisa tu conexión a internet e intenta nuevamente</string>
+
+    <string name="guardar_button">Guardar</string>
+    <string name="genero_dialog">Género</string>
+    <string name="roomies_dialog">Roomies</string>
+    <string name="reiniciar_dialog">Reiniciar Filtro</string>
+    <string name="aplicar_dialog">Aplicar Filtro</string>
+    <string name="sobremi_perfil">Sobre Mi</string>
+
+    <string name="invitar_amigos">Conéctate con gente alrededor del mundo y encuentra al Roomie ideal! http://just4roomies.com/ </string>
+
+    <string name="login_bt_face_hint">Inicia Sesión con Facebook</string>
+    <string name="login_terminos">Al iniciar sesión estás aceptando nuestros <u>Términos</u> y <u>Condiciones</u></string>
+    <string name="login_dialog_title">Iniciar Sesión</string>
+    <string name="login_account_already">¿Ya tienes una cuenta?</string>
+    <string name="login_register">Registarse</string>
+    <string name="login_login">Iniciar Sesión</string>
+
+    <string name="personalidad_nombre_hint">Nombre</string>
+    <string name="personalidad_nacionalidad_hint">Nacionalidad</string>
+    <string name="personalidad_idioma_hint">Idioma</string>
+    <string name="personalidad_edad_hint">Edad</string>
+    <string name="personalidad_tv_personalidad">Personalidad</string>
+    <string name="personalidad_fumas">¿Fumas?</string>
+    <string name="personalidad_mascotas">¿Tienes Mascotas?</string>
+    <string name="personalidad_activo">¿Activo ó Sedentario?</string>
+    <string name="personalidad_dedicacion">Estudias ó Trabajas</string>
+    <string name="personalidad_fiestero">Fiestero ó Tranquilo</string>
+    <string name="personalidad_cocinas">¿Cocinas?</string>
+    <string name="personalidad_guardar">Guardar</string>
+    <string name="personalidad_ubicacion">¿Dónde estas buscando roomies?</string>
+    <string name="personalidad_ubicacion_hint">Ubicación</string>
+    <string name="personalidad_dialogo_titulo">Agregar Usuario</string>
+    <string name="personalidad_dailogo_bien"></string>
+    <string name="personalidad_dailogo_mal">El usuario no ha sido creado, intente nuevamente</string>
+    <string name="personalidad_agregar_dialogo_nombre">El campo Nombre está vacío</string>
+    <string name="personalidad_agregar_dialogo_nacionalidad">El campo Nacionalidad está vacío</string>
+    <string name="personalidad_agregar_dialogo_idioma">El campo Idioma está vacío</string>
+    <string name="personalidad_agregar_dialogo_edad">El campo Edad está vacío</string>
+
+    <string name="buscarroomie_listos">¿List@ para buscar a tu roomie ideal?</string>
+    <string name="buscarroomie_et_hint">¿Dónde te gustaría buscar?</string>
+    <string name="buscarroomie_situacion">Situación Actual</string>
+    <string name="buscarroomie_buscoroomieyhabitacion">Busco Roomie y Habitación</string>
+    <string name="buscarroomie_buscohabitacion">Busco Habitación</string>
+    <string name="buscarroomie_ofrezcohabitacion">Ofrezco Habitación</string>
+    <string name="buscarroomie_nohayperfiles">Actualmente no hay roomies en esta área</string>
+    <string name="buscrarommie_buscarotrazona">Buscar en otra zona</string>
+
+    <string name="ofrecer_cuandoestara">¿Cuando estará disponible?</string>
+    <string name="ofrecer_precio_hint">Precio</string>
+    <string name="ofrecer_amueblado">Amueblado</string>
+    <string name="ofrecer_noamueblado">No Amueblado</string>
+    <string name="ofrecer_alerta_titulo">Ofrecer Habitación</string>
+    <string name="ofrecer_alerta_mensaje_bien">Habitación guardada con éxito</string>
+    <string name="ofrecer_alerta_mensaje_mal">Ocurrió un error, vuelve a intentarlo</string>
+
+    <string name="ajustes_titulo">Ajustes</string>
+    <string name="ajustes_notificacion">Notificaciones</string>
+    <string name="ajustes_localizacion">Localización</string>
+    <string name="ajustes_politica">Política de Privacidad</string>
+    <string name="ajustes_terminos">Términos de uso</string>
+    <string name="ajustes_eliminarcuenta">Eliminar Cuenta</string>
+
+    <string name="buscar_roomiesacabados">Te Acabaste los Roomies</string>
+    <string name="buscar_buscardenuevo">Buscar de Nuevo</string>
+    <string name="buscar_disponible">Disponible a partir de </string>
+
+    <string name="editarperfil_dialog_titlo">Actualizar Perfil</string>
+    <string name="editarperfil_dialog_mensaje_bien">Perfil Actualizado con éxito</string>
+    <string name="editarperfil_dialog_mensaje_mal">Ocurrió un error al actualizar. Intente nuevamente</string>
+
+    <string name="contacto_asunto">Asunto</string>
+    <string name="contacto_nombre">Nombre</string>
+    <string name="contacto_mensaje">Mensaje</string>
+    <string name="contacto_dialog_titulo">Contacto</string>
+    <string name="contacto_dialog_mensaje_bien">Mensaje enviado con éxito</string>
+    <string name="contacto_dialog_mensaje_mal">Ocurrió un error, Intente Nuevamente</string>
+
+
+    <string name="mensaje_error">Ocurrió un error, intente nuevamente</string>
+
+    <string name="gcm_send_message">Token retrieved and sent to server! You can now use gcmsender to
+        send downstream messages to this app.</string>
+    <string name="registering_message">Generating InstanceID token...</string>
+    <string name="token_error_message">An error occurred while either fetching the InstanceID token,
+        sending the fetched token to the server or subscribing to the PubSub topic. Please try
+        running the sample again.</string>
+
+    <string name="chat_solicitudes">Solicitudes</string>
+    <string name="chat_solicitudes_mesaje">Busca roomies para comenzar!</string>
+    <string name="chat_misroomies">Mis roomies</string>
+    <string name="chat_chats_mesaje">No hay nuevos mensajes!</string>
+
+
+    <string name="solicitud_dialogo_titulo">Solicitud</string>
+    <string name="solicitud_dialogo_mensaje_bien">Has aceptado la solicitud.</string>
+    <string name="solicitud_dialogo_mensaje_mal">Has rechazado la solicitud.</string>
+
+    <string name="menu_editarperfil">Editar Perfil</string>
+    <string name="menu_buscarroomie">Buscar Roomie</string>
+    <string name="menu_chats_conexiones">Chats/Conexiones</string>
+    <string name="menu_ofrecerhabitacion">Ofrecer Habitación</string>
+    <string name="menu_ajustes">Ajustes</string>
+    <string name="menu_invitar_amigos">Invitar Amigos</string>
+    <string name="menu_calificarapp">Calificar App</string>
+    <string name="menu_cerrarsesion">Cerrar Sesión</string>
+    <string name="menu_contactanos">Contáctanos</string>
+
+    <string name="login_iniciando">Iniciando Sesión...</string>
+
+
+</resources>
