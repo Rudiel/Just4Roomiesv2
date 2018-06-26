@@ -22,6 +22,7 @@
 
     <Button
         android:id="@+id/btLoginFacebook"
+        android:textAllCaps="false"
         android:layout_width="match_parent"
         android:background="@drawable/boton_blanco_fb"
         android:layout_height="wrap_content"
@@ -37,12 +38,13 @@
     <ImageView
         android:id="@+id/ivLogoLogin"
         android:layout_width="150dp"
+        android:layout_alignParentTop="true"
         android:layout_height="150dp"
         android:layout_above="@id/btLoginFacebook"
         android:layout_centerHorizontal="true"
         android:layout_centerInParent="true"
         android:layout_marginBottom="10dp"
-        android:src="@drawable/ic_launcher_background" />
+        android:src="@drawable/logo_app_just" />
 
     <TextView
         android:id="@+id/tvAccountAlready"

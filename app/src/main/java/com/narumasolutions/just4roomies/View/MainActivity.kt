@@ -7,11 +7,25 @@ import com.narumasolutions.just4roomies.R
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var  viewModel : MainActivity
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         this.requestWindowFeature(android.view.Window.FEATURE_NO_TITLE)
         this.window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN)
         setTheme(R.style.AppTheme)
         setContentView(R.layout.layout_login)
+
+        init()
+    }
+
+    fun init(){
+
+        initViewModel()
+
+    }
+
+    fun initViewModel(){
+
     }
 }
