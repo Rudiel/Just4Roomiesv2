@@ -20,6 +20,9 @@
     <string name="login_account_already">¿Ya tienes una cuenta?</string>
     <string name="login_register">Registarse</string>
     <string name="login_login">Iniciar Sesión</string>
+    <string name="login_password_forgot">¿Olvidaste tu contraseña?</string>
+    <string name="login_hint_password">Contraseña</string>
+    <string name="login_hint_usuario">Correo electrónico</string>
 
     <string name="personalidad_nombre_hint">Nombre</string>
     <string name="personalidad_nacionalidad_hint">Nacionalidad</string>

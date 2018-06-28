@@ -12,12 +12,4 @@ interface AppComponent {
 
     fun inject(mainActivityViewModel: MainActivityViewModel)
 
-    @Component.Builder
-    interface Builder {
-
-        fun build(): AppComponent
-
-        fun networkModule(netModule: NetModule):Builder
-    }
-
 }

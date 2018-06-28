@@ -18,7 +18,7 @@ abstract class BaseViewModel : ViewModel(){
 
     private fun inject(){
         when(this){
-            //is PostListViewModel -> injector.inject(this)
+            is MainActivityViewModel -> injector.inject(this)
         }
     }
 

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <group>
+
+        <item
+            android:id="@+id/menu_editarperfil"
+            android:checked="false"
+            android:icon="@android:drawable/ic_btn_speak_now"
+            android:title="@string/menu_editarperfil" />
+
+        <item
+            android:id="@+id/menu_buscarroomie"
+            android:checked="false"
+            android:icon="@android:drawable/ic_btn_speak_now"
+            android:title="@string/menu_buscarroomie" />
+
+        <item
+            android:id="@+id/menu_chats"
+            android:checked="false"
+            android:icon="@android:drawable/ic_btn_speak_now"
+            android:title="@string/menu_chats_conexiones" />
+
+        <item
+            android:id="@+id/menu_ofrecer"
+            android:checked="false"
+            android:icon="@android:drawable/ic_btn_speak_now"
+            android:title="@string/menu_ofrecerhabitacion" />
+
+        <item
+            android:id="@+id/menu_ajustes"
+            android:checked="false"
+            android:icon="@android:drawable/ic_btn_speak_now"
+            android:title="@string/menu_ajustes" />
+
+
+    </group>
+
+    <item
+        android:id="@+id/menu_social"
+        android:title="@null">
+        <menu>
+            <item
+                android:id="@+id/menu_invitaramigos"
+                android:checked="false"
+                android:icon="@android:drawable/ic_btn_speak_now"
+                android:title="@string/menu_invitar_amigos" />
+
+            <item
+                android:id="@+id/menu_calificarapp"
+                android:checked="false"
+                android:icon="@android:drawable/ic_btn_speak_now"
+                android:title="@string/menu_calificarapp" />
+
+            <item
+                android:id="@+id/menu_cerrarsesion"
+                android:checked="false"
+                android:icon="@android:drawable/ic_btn_speak_now"
+                android:title="@string/menu_cerrarsesion" />
+        </menu>
+    </item>
+
+    <item
+        android:id="@+id/navigation_subheader"
+        android:title="@null">
+        <menu>
+            <item
+                android:id="@+id/menu_contactanos"
+                android:icon="@android:drawable/ic_btn_speak_now"
+                android:title="@string/menu_contactanos" />
+
+        </menu>
+    </item>
+</menu>
