@@ -6,6 +6,7 @@ import android.databinding.DataBindingUtil
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
+import android.widget.Toast
 
 import com.narumasolutions.just4roomies.R;
 import com.narumasolutions.just4roomies.databinding.LayoutLoginSesionBinding
@@ -40,6 +41,8 @@ class LoginActivity : AppCompatActivity() {
             503 -> message = ""
             else -> message = ""
         }
+
+        Toast.makeText(this,message,Toast.LENGTH_SHORT).show()
     }
 
 

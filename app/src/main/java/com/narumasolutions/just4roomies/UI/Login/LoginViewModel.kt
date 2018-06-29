@@ -4,45 +4,46 @@ import android.arch.lifecycle.MutableLiveData
 import android.view.View
 import com.narumasolutions.just4roomies.Just4RoomiesServices
 import com.narumasolutions.just4roomies.Model.Response.UserResponse
+import com.narumasolutions.just4roomies.R.id.etPassword
+import com.narumasolutions.just4roomies.R.id.etUsuario
 import com.narumasolutions.just4roomies.ViewModel.BaseViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
-import okhttp3.Call
-import okhttp3.ResponseBody
 import javax.inject.Inject
 
-class LoginViewModel() : BaseViewModel() {
+class LoginViewModel : BaseViewModel() {
 
     @Inject
     lateinit var services: Just4RoomiesServices
 
     val loadingVisibility: MutableLiveData<Int> = MutableLiveData()
     val response: MutableLiveData<Int> = MutableLiveData()
-    val loginClickListener = View.OnClickListener { doLogin() }
+    val loginClickListener = View.OnClickListener { doLogin(etUsuario.toString(),etPassword.toString()) }
 
-    private lateinit var subscription: Disposable
+    private var subscription: Disposable? = null
 
 
     init {
-
     }
 
-    fun doLogin() {
+    fun doLogin(usuario: String, passwprd: String) {
+
+
         subscription = services.login()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { onRetriveLoginStart() }
                 .doOnTerminate { onRetriveLoginFinish() }
                 .subscribe(
-                        { onRetriveLoginSucces(it)},
-                        {onRetriveLoginError(it)}
+                        { onRetriveLoginSucces(it) },
+                        { onRetriveLoginError(it) }
                 )
     }
 
     override fun onCleared() {
         super.onCleared()
-        subscription.dispose()
+        subscription?.dispose()
     }
 
     fun onRetriveLoginFinish() {
@@ -54,11 +55,11 @@ class LoginViewModel() : BaseViewModel() {
     }
 
     fun onRetriveLoginSucces(userResponse: UserResponse) {
-        response.value= userResponse.code
+        response.value = userResponse.code
     }
 
     fun onRetriveLoginError(throwable: Throwable) {
-        throwable.message
+        response.value = throwable.hashCode()
     }
 
 }
