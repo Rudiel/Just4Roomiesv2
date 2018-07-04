@@ -5,6 +5,8 @@ import android.view.View
 import com.narumasolutions.just4roomies.Just4RoomiesServices
 import com.narumasolutions.just4roomies.Model.Request.User
 import com.narumasolutions.just4roomies.R
+import io.reactivex.ObservableTransformer
+import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -24,6 +26,7 @@ class MainActivityViewModel : BaseViewModel() {
     init {
         getRoomies()
     }
+
 
     private fun getRoomies() {
 
