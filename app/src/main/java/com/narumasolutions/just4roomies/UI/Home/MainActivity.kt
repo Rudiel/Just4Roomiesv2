@@ -1,14 +1,15 @@
-package com.narumasolutions.just4roomies.View
+package com.narumasolutions.just4roomies.UI.Home
 
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.renderscript.ScriptGroup
 import android.view.WindowManager
+import com.mukesh.countrypicker.fragments.CountryPicker
+import com.mukesh.countrypicker.interfaces.CountryPickerListener
 import com.narumasolutions.just4roomies.R
 import com.narumasolutions.just4roomies.UI.Login.LoginActivity
 import com.narumasolutions.just4roomies.UI.Register.RegisterActivity
-import com.narumasolutions.just4roomies.ViewModel.MainActivityViewModel
 import kotlinx.android.synthetic.main.layout_login.*
 
 class MainActivity : AppCompatActivity() {
@@ -24,6 +25,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.layout_login)
 
         init()
+
     }
 
     fun init() {
@@ -38,7 +40,6 @@ class MainActivity : AppCompatActivity() {
         btRegistrarse.setOnClickListener {
             startActivity(Intent(this@MainActivity, RegisterActivity::class.java))
         }
-
     }
 
     fun initViewModel() {

@@ -1,9 +1,10 @@
-package com.narumasolutions.just4roomies.ViewModel
+package com.narumasolutions.just4roomies.UI
 
 import android.arch.lifecycle.ViewModel
 import com.narumasolutions.just4roomies.Dagger.Component.AppComponent
 import com.narumasolutions.just4roomies.Dagger.Component.DaggerAppComponent
 import com.narumasolutions.just4roomies.Dagger.Module.NetModule
+import com.narumasolutions.just4roomies.UI.Home.MainActivityViewModel
 import com.narumasolutions.just4roomies.UI.Login.LoginViewModel
 import com.narumasolutions.just4roomies.UI.Register.RegisterViewModel
 

@@ -2,12 +2,15 @@ package com.narumasolutions.just4roomies.UI.Register
 
 import android.arch.lifecycle.MutableLiveData
 import android.view.View
+import com.mukesh.countrypicker.fragments.CountryPicker
+import com.mukesh.countrypicker.interfaces.CountryPickerListener
 import com.narumasolutions.just4roomies.Just4RoomiesServices
-import com.narumasolutions.just4roomies.ViewModel.BaseViewModel
+import com.narumasolutions.just4roomies.UI.BaseViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
+
 
 class RegisterViewModel : BaseViewModel() {
 
@@ -19,8 +22,17 @@ class RegisterViewModel : BaseViewModel() {
     val response : MutableLiveData<Int> = MutableLiveData()
     val registerClickListener = View.OnClickListener { doRgister() }
 
+    val nationClickListener = View.OnClickListener { showNationPicker()  }
+
+    val showCountryPicker : MutableLiveData<Boolean> = MutableLiveData()
+
     init {
 
+
+    }
+
+    fun showNationPicker() {
+            showCountryPicker.value = true
     }
 
     override fun onCleared() {

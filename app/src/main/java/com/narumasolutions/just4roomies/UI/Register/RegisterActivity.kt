@@ -5,8 +5,13 @@ import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.View
+import com.mukesh.countrypicker.fragments.CountryPicker
+import com.mukesh.countrypicker.interfaces.CountryPickerListener
+import com.mukesh.countrypicker.models.Country
 import com.narumasolutions.just4roomies.R
 import com.narumasolutions.just4roomies.databinding.LayoutRegisterBinding
+import kotlinx.android.synthetic.main.layout_register.*
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -20,7 +25,23 @@ class RegisterActivity : AppCompatActivity() {
 
         viewModel.response.observe(this, Observer { })
 
+        viewModel.showCountryPicker.observe(this, Observer { response -> if(response==true) showCountryPicker() })
+
         binding.registerViewModel = viewModel
+
+
+    }
+
+    fun showCountryPicker(){
+        val countryPicker : CountryPicker = CountryPicker.newInstance("Select your country")
+        countryPicker.setListener { name, code, dialCode, flawDrawable ->
+            tvCountry.setText(name)
+            ivCountry.setImageDrawable(resources.getDrawable(flawDrawable))
+            countryPicker.dismiss()
+        }
+        countryPicker.setStyle(CountryPicker.STYLE_NORMAL,R.style.CountryDialogTheme)
+        countryPicker.show(this.supportFragmentManager,"COUNTRY")
+
     }
 
     fun showErrorMessage() {

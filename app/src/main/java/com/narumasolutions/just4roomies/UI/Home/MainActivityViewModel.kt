@@ -1,12 +1,11 @@
-package com.narumasolutions.just4roomies.ViewModel
+package com.narumasolutions.just4roomies.UI.Home
 
 import android.arch.lifecycle.MutableLiveData
 import android.view.View
 import com.narumasolutions.just4roomies.Just4RoomiesServices
 import com.narumasolutions.just4roomies.Model.Request.User
 import com.narumasolutions.just4roomies.R
-import io.reactivex.ObservableTransformer
-import io.reactivex.Single
+import com.narumasolutions.just4roomies.UI.BaseViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers

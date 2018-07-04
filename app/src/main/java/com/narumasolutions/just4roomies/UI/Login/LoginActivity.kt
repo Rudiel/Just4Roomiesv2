@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
 import android.widget.Toast
+import com.mukesh.countrypicker.fragments.CountryPicker
+import com.mukesh.countrypicker.BuildConfig
 
 import com.narumasolutions.just4roomies.R;
 import com.narumasolutions.just4roomies.databinding.LayoutLoginSesionBinding
@@ -29,6 +31,7 @@ class LoginActivity : AppCompatActivity() {
 
         binding.loginViewModel = viewModel
 
+
     }
 
     fun showErrorDialog(code: Int) {
@@ -36,13 +39,14 @@ class LoginActivity : AppCompatActivity() {
         var message = ""
 
         when (code) {
+            500 -> message = "Bad Response"
             501 -> message = ""
-            502 -> message = " "
-            503 -> message = ""
-            else -> message = ""
+            502 -> message = "Usuario no tiene el formato adecuado"
+            503 -> message = "Contraseña no valida"
+            else -> message = "Ocurrio un Error"
         }
 
-        Toast.makeText(this,message,Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, message + code, Toast.LENGTH_SHORT).show()
     }
 
 
