@@ -1,19 +1,22 @@
 package com.narumasolutions.just4roomies.UI.Login;
 
 import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Patterns
 import android.view.WindowManager;
-import android.widget.Toast
-import com.mukesh.countrypicker.fragments.CountryPicker
-import com.mukesh.countrypicker.BuildConfig
+import com.narumasolutions.just4roomies.Creators.AlertDialog
 
 import com.narumasolutions.just4roomies.R;
 import com.narumasolutions.just4roomies.databinding.LayoutLoginSesionBinding
+import kotlinx.android.synthetic.main.layout_login_sesion.*
 
 class LoginActivity : AppCompatActivity() {
+
+    private lateinit var viewModel: LoginViewModel
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,13 +26,19 @@ class LoginActivity : AppCompatActivity() {
 
         val binding = DataBindingUtil.setContentView<LayoutLoginSesionBinding>(this, R.layout.layout_login_sesion)
 
-        val viewModel = ViewModelProviders.of(this).get(LoginViewModel::class.java)
+        viewModel = ViewModelProviders.of(this).get(LoginViewModel::class.java)
 
         viewModel.response.observe(this, Observer { response ->
             if (response == 400) openMainActivity() else response?.let { showErrorDialog(it) }
         })
 
         binding.loginViewModel = viewModel
+
+        binding.setLifecycleOwner(this)
+
+        btLogin.setOnClickListener({
+            validateFields()
+        })
 
 
     }
@@ -46,12 +55,22 @@ class LoginActivity : AppCompatActivity() {
             else -> message = "Ocurrio un Error"
         }
 
-        Toast.makeText(this, message + code, Toast.LENGTH_SHORT).show()
+        AlertDialog().showDialog(this , message, getString(R.string.login_login)).show()
+
     }
 
+    private fun validateFields() {
+        if (!Patterns.EMAIL_ADDRESS.matcher(etUsuario.text).matches())
+            showErrorDialog(502)
+        else if (etPassword.text.isNullOrEmpty() or  (etPassword.text.length < 6))
+            showErrorDialog(503)
+        else
+            viewModel.doLogin()
+
+    }
 
     fun openMainActivity() {
-
+        finish()
     }
 
 }

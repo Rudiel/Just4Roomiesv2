@@ -19,6 +19,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        //checkLogin()
+
         this.requestWindowFeature(android.view.Window.FEATURE_NO_TITLE)
         this.window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
         setTheme(R.style.AppTheme)
@@ -30,8 +33,6 @@ class MainActivity : AppCompatActivity() {
 
     fun init() {
 
-        initViewModel()
-
         btIniciarSesion.setOnClickListener {
 
             startActivity(Intent(this@MainActivity, LoginActivity::class.java))
@@ -42,7 +43,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun initViewModel() {
-
+    private fun checkLogin() {
+        val intent = Intent(this@MainActivity, RegisterActivity::class.java)
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+        startActivity(intent)
+        finish()
     }
 }

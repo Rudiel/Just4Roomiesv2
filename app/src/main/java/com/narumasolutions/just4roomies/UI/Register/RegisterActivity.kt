@@ -3,6 +3,8 @@ package com.narumasolutions.just4roomies.UI.Register
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
+import android.graphics.PorterDuff
+import android.os.Build
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
@@ -35,6 +37,9 @@ class RegisterActivity : AppCompatActivity() {
     fun showCountryPicker(){
         val countryPicker : CountryPicker = CountryPicker.newInstance("Select your country")
         countryPicker.setListener { name, code, dialCode, flawDrawable ->
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                ivCountry.imageTintMode = null
+            }
             tvCountry.setText(name)
             ivCountry.setImageDrawable(resources.getDrawable(flawDrawable))
             countryPicker.dismiss()

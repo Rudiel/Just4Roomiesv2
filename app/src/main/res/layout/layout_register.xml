@@ -18,7 +18,7 @@
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
+            android:background="@color/colorAccent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
@@ -46,8 +46,9 @@
                 android:layout_marginEnd="32dp"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="8dp"
-                android:background="@drawable/boton_blanco_fb"
-                android:drawableLeft="@android:drawable/ic_btn_speak_now"
+                android:background="@drawable/boton_blanco_bordegris"
+                android:drawableLeft="@drawable/baseline_my_location_black_24"
+                android:drawableTint="@color/colorPrimary"
                 android:ems="10"
                 android:inputType="textEmailAddress"
                 android:textColor="@color/colorPrimary"
@@ -66,7 +67,7 @@
                 android:layout_marginEnd="32dp"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="8dp"
-                android:background="@drawable/boton_blanco_fb"
+                android:background="@drawable/boton_blanco_bordegris"
                 android:drawableLeft="@android:drawable/ic_btn_speak_now"
                 android:ems="10"
                 android:inputType="textEmailAddress"
@@ -86,8 +87,9 @@
                 android:layout_marginEnd="32dp"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="8dp"
-                android:background="@drawable/boton_blanco_fb"
-                android:drawableLeft="@android:drawable/ic_btn_speak_now"
+                android:background="@drawable/boton_blanco_bordegris"
+                android:drawableLeft="@drawable/baseline_public_black_24"
+                android:drawableTint="@color/colorPrimary"
                 android:ems="10"
                 android:hint="@string/personalidad_idioma_hint"
                 android:gravity="center"
@@ -106,7 +108,7 @@
                 android:layout_marginEnd="32dp"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="8dp"
-                android:background="@drawable/boton_blanco_fb"
+                android:background="@drawable/boton_blanco_bordegris"
                 android:onClick="@{registerViewModel.nationClickListener}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -126,9 +128,10 @@
                     android:id="@+id/ivCountry"
                     android:layout_width="40dp"
                     android:layout_height="30dp"
+                    android:tint="@color/colorPrimary"
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
-                    android:src="@drawable/ic_search" />
+                    android:src="@drawable/baseline_flag_black_24" />
 
 
             </RelativeLayout>
@@ -141,8 +144,9 @@
                 android:layout_marginEnd="32dp"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="32dp"
-                android:background="@drawable/boton_blanco_fb"
-                android:drawableLeft="@android:drawable/ic_btn_speak_now"
+                android:background="@drawable/boton_blanco_bordegris"
+                android:drawableLeft="@drawable/baseline_person_black_24"
+                android:drawableTint="@color/colorPrimary"
                 android:drawablePadding="-10dp"
                 android:ems="10"
                 android:gravity="center"
