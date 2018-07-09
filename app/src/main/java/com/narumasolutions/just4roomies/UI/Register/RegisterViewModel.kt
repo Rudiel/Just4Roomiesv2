@@ -2,9 +2,9 @@ package com.narumasolutions.just4roomies.UI.Register
 
 import android.arch.lifecycle.MutableLiveData
 import android.view.View
-import com.mukesh.countrypicker.fragments.CountryPicker
-import com.mukesh.countrypicker.interfaces.CountryPickerListener
 import com.narumasolutions.just4roomies.Just4RoomiesServices
+import com.narumasolutions.just4roomies.Model.Request.RegisterNew
+import com.narumasolutions.just4roomies.Model.Response.UserResponse
 import com.narumasolutions.just4roomies.UI.BaseViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -19,20 +19,21 @@ class RegisterViewModel : BaseViewModel() {
 
     private var subscription: Disposable? = null
 
-    val response : MutableLiveData<Int> = MutableLiveData()
-    val registerClickListener = View.OnClickListener { doRgister() }
+    val response: MutableLiveData<UserResponse> = MutableLiveData()
 
-    val nationClickListener = View.OnClickListener { showNationPicker()  }
-
-    val showCountryPicker : MutableLiveData<Boolean> = MutableLiveData()
-
-    init {
+    val pbVisibility : MutableLiveData<Int> = MutableLiveData()
 
 
-    }
+    fun doRegister(register: RegisterNew) {
 
-    fun showNationPicker() {
-            showCountryPicker.value = true
+        subscription = services.doRegister(register)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe{onRetriveRegisterStart()}
+                .doOnTerminate{onRetriveRegisterFinish()}
+                .subscribe({result-> onRetriveRegisterSucces(result)},{onRetriveRegisterError()})
+
+
     }
 
     override fun onCleared() {
@@ -40,25 +41,22 @@ class RegisterViewModel : BaseViewModel() {
         subscription?.dispose()
     }
 
-    fun doRgister() {
-
-        subscription = services.login()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe { onRetriveRegisterstart() }
-                .doOnTerminate { onRetriveRegisterFinish() }
-                .subscribe(
-                        { onRetriveRegisterSucces() },
-                        { onRetriveRegisterError() }
-                )
+    private fun onRetriveRegisterStart() {
+            pbVisibility.value= View.VISIBLE
     }
 
-    fun onRetriveRegisterstart() {}
+    private fun onRetriveRegisterFinish() {
+            pbVisibility.value=View.GONE
+    }
 
-    fun onRetriveRegisterFinish() {}
+    private fun onRetriveRegisterSucces(response: UserResponse)
+    {
+        this.response.value= response
+    }
 
-    fun onRetriveRegisterSucces() {}
+    private fun onRetriveRegisterError() {
 
-    fun onRetriveRegisterError() {}
+        this.response.value = UserResponse("",500,"")
+    }
 
 }

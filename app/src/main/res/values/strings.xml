@@ -117,5 +117,12 @@
 
     <string name="login_iniciando">Iniciando Sesión...</string>
 
+    <string name="register_name">Nombre</string>
+    <string name="register_lastname">Apellido</string>
+    <string name="register_email">Correo Electrónico</string>
+    <string name="register_pass">Contraseña</string>
+    <string name="register_repitpass">Repetir Contraseña</string>
+    <string name="register">Registrarse</string>
+
 
 </resources>

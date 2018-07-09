@@ -27,7 +27,7 @@ class LoginViewModel : BaseViewModel() {
     }
 
 
-    public fun doLogin() {
+    fun doLogin() {
 
         subscription = services.login()
                 .subscribeOn(Schedulers.io())
@@ -55,7 +55,7 @@ class LoginViewModel : BaseViewModel() {
     }
 
     fun onRetriveLoginSucces(userResponse: UserResponse) {
-        response.value = userResponse.code
+        response.value = userResponse.Code
     }
 
     fun onRetriveLoginError(code: Int) {

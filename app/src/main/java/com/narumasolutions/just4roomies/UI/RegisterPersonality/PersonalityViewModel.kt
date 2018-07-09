@@ -1,8 +1,12 @@
 package com.narumasolutions.just4roomies.UI.RegisterPersonality
 
+import android.arch.lifecycle.MutableLiveData
+import android.view.View
 import com.narumasolutions.just4roomies.Just4RoomiesServices
 import com.narumasolutions.just4roomies.UI.BaseViewModel
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class PersonalityViewModel : BaseViewModel() {
@@ -12,8 +16,20 @@ class PersonalityViewModel : BaseViewModel() {
 
     private var subscription: Disposable? = null
 
+    val response : MutableLiveData<Int> = MutableLiveData()
+    val registerClickListener = View.OnClickListener { doRgister() }
+
+    val nationClickListener = View.OnClickListener { showNationPicker()  }
+
+    val showCountryPicker : MutableLiveData<Boolean> = MutableLiveData()
+
     init {
 
+
+    }
+
+    fun showNationPicker() {
+        showCountryPicker.value = true
     }
 
     override fun onCleared() {
@@ -21,25 +37,26 @@ class PersonalityViewModel : BaseViewModel() {
         subscription?.dispose()
     }
 
-    fun getPersonality(){
+    fun doRgister() {
 
+        subscription = services.login()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe { onRetriveRegisterstart() }
+                .doOnTerminate { onRetriveRegisterFinish() }
+                .subscribe(
+                        { onRetriveRegisterSucces() },
+                        { onRetriveRegisterError() }
+                )
     }
 
-    fun onRetrivePersonalityStart() {
+    fun onRetriveRegisterstart() {}
 
-    }
+    fun onRetriveRegisterFinish() {}
 
-    fun onRetrivePersonalityFinish() {
+    fun onRetriveRegisterSucces() {}
 
-    }
-
-    fun onRetrivePersonalitySucces() {
-
-    }
-
-    fun onRetrivePersonalityError() {
-
-    }
+    fun onRetriveRegisterError() {}
 
 
 }
