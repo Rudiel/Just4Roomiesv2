@@ -25,10 +25,11 @@
 
 
             <ImageView
-                android:id="@+id/imageView3"
+                android:id="@+id/ivRegisterPhoto"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:layout_marginEnd="8dp"
+                android:drawableBottom="@android:drawable/ic_menu_camera"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="32dp"
                 android:src="@mipmap/ic_launcher"
@@ -46,7 +47,7 @@
                 android:hint="@string/register_name"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+                app:layout_constraintTop_toBottomOf="@+id/ivRegisterPhoto" />
 
             <EditText
                 android:id="@+id/etLastName"
