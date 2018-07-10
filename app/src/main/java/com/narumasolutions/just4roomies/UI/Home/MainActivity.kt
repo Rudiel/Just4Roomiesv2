@@ -5,8 +5,13 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.renderscript.ScriptGroup
 import android.view.WindowManager
+import com.facebook.CallbackManager
+import com.facebook.FacebookCallback
+import com.facebook.FacebookException
+import com.facebook.login.LoginResult
 import com.mukesh.countrypicker.fragments.CountryPicker
 import com.mukesh.countrypicker.interfaces.CountryPickerListener
+import com.narumasolutions.just4roomies.Creators.AlertDialog
 import com.narumasolutions.just4roomies.R
 import com.narumasolutions.just4roomies.UI.Login.LoginActivity
 import com.narumasolutions.just4roomies.UI.Register.RegisterActivity
@@ -16,6 +21,8 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var viewModel: MainActivityViewModel
     private lateinit var bindig: ScriptGroup.Binding
+
+    private lateinit var callbackManager: CallbackManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +40,8 @@ class MainActivity : AppCompatActivity() {
 
     fun init() {
 
+        callbackManager = CallbackManager.Factory.create()
+
         btIniciarSesion.setOnClickListener {
 
             startActivity(Intent(this@MainActivity, LoginActivity::class.java))
@@ -41,6 +50,30 @@ class MainActivity : AppCompatActivity() {
         btRegistrarse.setOnClickListener {
             startActivity(Intent(this@MainActivity, RegisterActivity::class.java))
         }
+
+        btFacebook.setReadPermissions("email")
+
+        btLoginFacebook.setOnClickListener({ btFacebook.performClick() })
+
+        btFacebook.registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
+            override fun onSuccess(result: LoginResult?) {
+
+            }
+
+            override fun onCancel() {
+                showErroDialog("Has cancelado el inicio de sesion")
+            }
+
+
+            override fun onError(error: FacebookException?) {
+                showErroDialog(error.toString())
+            }
+        })
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        callbackManager.onActivityResult(requestCode, resultCode, data)
+        super.onActivityResult(requestCode, resultCode, data)
     }
 
     private fun checkLogin() {
@@ -48,5 +81,9 @@ class MainActivity : AppCompatActivity() {
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(intent)
         finish()
+    }
+
+    private fun showErroDialog(message: String) {
+        AlertDialog().showDialog(this, message, "Facebook Login")
     }
 }

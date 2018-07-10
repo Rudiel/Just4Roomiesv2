@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/fondo_degradado"
@@ -20,27 +19,37 @@
          android:layout_gravity="center_horizontal"
          android:visibility="invisible" />-->
 
-    <Button
-        android:id="@+id/btLoginFacebook"
-        android:textAllCaps="false"
-        android:layout_width="match_parent"
-        android:background="@drawable/boton_blanco_fb"
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/btFacebook"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="30dp"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/btLoginFacebook"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_margin="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/boton_blanco_fb"
         android:elevation="4dp"
         android:text="@string/login_bt_face_hint"
-        android:layout_margin="10dp"
-        android:textColor="@color/colorPrimary"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp" />
+        android:textAllCaps="false"
+        android:textColor="@color/colorPrimary" />
 
 
     <ImageView
         android:id="@+id/ivLogoLogin"
         android:layout_width="150dp"
-        android:layout_alignParentTop="true"
         android:layout_height="150dp"
         android:layout_above="@id/btLoginFacebook"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_centerInParent="true"
         android:layout_marginBottom="10dp"
@@ -59,33 +68,33 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/tvAccountAlready"
-        android:layout_marginTop="10dp"
         android:layout_margin="10dp"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal">
 
         <Button
-            android:layout_width="0dp"
-            android:background="@drawable/boton_transparente_borde_blanco"
-            android:textColor="@color/colorAccent"
             android:id="@+id/btIniciarSesion"
-            android:layout_marginRight="5dp"
-            android:elevation="4dp"
-            android:textAllCaps="false"
-            android:text="@string/login_login"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/boton_transparente_borde_blanco"
+            android:elevation="4dp"
+            android:text="@string/login_login"
+            android:textAllCaps="false"
+            android:textColor="@color/colorAccent" />
 
         <Button
-            android:background="@drawable/boton_transparente_borde_blanco"
             android:id="@+id/btRegistrarse"
-            android:textAllCaps="false"
-            android:elevation="4dp"
-            android:layout_marginLeft="5dp"
-            android:text="@string/login_register"
-            android:textColor="@color/colorAccent"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/boton_transparente_borde_blanco"
+            android:elevation="4dp"
+            android:text="@string/login_register"
+            android:textAllCaps="false"
+            android:textColor="@color/colorAccent" />
     </LinearLayout>
 
     <TextView

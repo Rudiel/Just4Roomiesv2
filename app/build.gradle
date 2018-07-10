@@ -71,8 +71,10 @@ dependencies {
     implementation "android.arch.lifecycle:extensions:1.1.1"
     kapt "android.arch.lifecycle:compiler:1.1.1"
 
+    //Country Picker
     implementation 'com.github.mukeshsolanki:country-picker-android:1.1.6'
 
-
+    //Facebook
+    implementation 'com.facebook.android:facebook-login:4.34.0'
 
 }
