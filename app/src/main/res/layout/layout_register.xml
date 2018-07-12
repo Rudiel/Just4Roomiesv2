@@ -27,12 +27,14 @@
             <ImageView
                 android:id="@+id/ivRegisterPhoto"
                 android:layout_width="120dp"
+                android:padding="2dp"
                 android:layout_height="120dp"
+                android:background="@drawable/fondo_circulo"
                 android:layout_marginEnd="8dp"
                 android:drawableBottom="@android:drawable/ic_menu_camera"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="32dp"
-                android:src="@mipmap/ic_launcher"
+                android:src="@android:drawable/ic_menu_camera"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -66,17 +68,17 @@
                 style="@style/EditTextTheme"
                 android:drawableLeft="@drawable/baseline_mail_black_24"
                 android:drawablePadding="10dp"
-                android:inputType="textPersonName"
+                android:inputType="textEmailAddress"
                 android:hint="@string/register_email"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.503"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/etLastName" />
 
-            <EditText
+            <android.support.design.widget.TextInputEditText
                 android:id="@+id/etPassword"
                 style="@style/EditTextTheme"
-                android:inputType="textPersonName"
+                android:inputType="textPassword"
                 android:hint="@string/register_pass"
                 android:drawablePadding="10dp"
                 android:drawableLeft="@drawable/baseline_lock_black_24"
@@ -85,12 +87,12 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/etEmail" />
 
-            <EditText
+            <android.support.design.widget.TextInputEditText
                 android:id="@+id/etRepitPassword"
                 style="@style/EditTextTheme"
                 android:drawableLeft="@drawable/baseline_lock_black_24"
                 android:drawablePadding="10dp"
-                android:inputType="textPersonName"
+                android:inputType="textPassword"
                 android:hint="@string/register_repitpass"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

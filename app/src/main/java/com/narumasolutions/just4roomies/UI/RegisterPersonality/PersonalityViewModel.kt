@@ -39,7 +39,7 @@ class PersonalityViewModel : BaseViewModel() {
 
     fun doRgister() {
 
-        subscription = services.login()
+        /*subscription = services.login()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { onRetriveRegisterstart() }
@@ -47,7 +47,7 @@ class PersonalityViewModel : BaseViewModel() {
                 .subscribe(
                         { onRetriveRegisterSucces() },
                         { onRetriveRegisterError() }
-                )
+                )*/
     }
 
     fun onRetriveRegisterstart() {}

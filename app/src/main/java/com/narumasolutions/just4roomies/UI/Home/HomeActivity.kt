@@ -9,15 +9,13 @@ import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
 import com.facebook.login.LoginResult
-import com.mukesh.countrypicker.fragments.CountryPicker
-import com.mukesh.countrypicker.interfaces.CountryPickerListener
 import com.narumasolutions.just4roomies.Creators.AlertDialog
 import com.narumasolutions.just4roomies.R
 import com.narumasolutions.just4roomies.UI.Login.LoginActivity
 import com.narumasolutions.just4roomies.UI.Register.RegisterActivity
 import kotlinx.android.synthetic.main.layout_login.*
 
-class MainActivity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity() {
 
     private lateinit var viewModel: MainActivityViewModel
     private lateinit var bindig: ScriptGroup.Binding
@@ -44,11 +42,11 @@ class MainActivity : AppCompatActivity() {
 
         btIniciarSesion.setOnClickListener {
 
-            startActivity(Intent(this@MainActivity, LoginActivity::class.java))
+            startActivity(Intent(this@HomeActivity, LoginActivity::class.java))
         }
 
         btRegistrarse.setOnClickListener {
-            startActivity(Intent(this@MainActivity, RegisterActivity::class.java))
+            startActivity(Intent(this@HomeActivity, RegisterActivity::class.java))
         }
 
         btFacebook.setReadPermissions("email")
@@ -77,7 +75,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun checkLogin() {
-        val intent = Intent(this@MainActivity, RegisterActivity::class.java)
+        val intent = Intent(this@HomeActivity, RegisterActivity::class.java)
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(intent)
         finish()

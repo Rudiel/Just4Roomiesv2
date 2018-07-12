@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Patterns
 import android.view.WindowManager;
 import com.narumasolutions.just4roomies.Creators.AlertDialog
+import com.narumasolutions.just4roomies.Model.Request.User
 
 import com.narumasolutions.just4roomies.R;
 import com.narumasolutions.just4roomies.databinding.LayoutLoginSesionBinding
@@ -52,6 +53,7 @@ class LoginActivity : AppCompatActivity() {
             501 -> message = ""
             502 -> message = "Usuario no tiene el formato adecuado"
             503 -> message = "Contraseña no valida"
+            401 -> message = "No esta autorizado"
             else -> message = "Ocurrio un Error"
         }
 
@@ -64,9 +66,9 @@ class LoginActivity : AppCompatActivity() {
             showErrorDialog(502)
         else if (etPassword.text.isNullOrEmpty() or  (etPassword.text.length < 6))
             showErrorDialog(503)
-        else
-            viewModel.doLogin()
-
+        else {
+            viewModel.doLogin(User(etUsuario.text.toString(),etPassword.text.toString()))
+        }
     }
 
     fun openMainActivity() {

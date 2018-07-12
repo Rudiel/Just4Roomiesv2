@@ -23,6 +23,7 @@ import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.narumasolutions.just4roomies.Creators.AlertDialog
 import com.narumasolutions.just4roomies.Creators.LoadingDialog
 import com.narumasolutions.just4roomies.Model.Request.RegisterNew
@@ -31,7 +32,6 @@ import com.narumasolutions.just4roomies.R
 import com.narumasolutions.just4roomies.Utils.REQUEST_CAMERA
 import com.narumasolutions.just4roomies.databinding.LayoutRegisterBinding
 import kotlinx.android.synthetic.main.layout_register.*
-import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.IOException
@@ -212,7 +212,7 @@ class RegisterActivity : AppCompatActivity() {
 
         bOutput.toByteArray()
 
-        Glide.with(this).load(bitmap).into(ivRegisterPhoto)
+        Glide.with(this).load(bitmap).apply(RequestOptions.circleCropTransform()).into(ivRegisterPhoto)
 
     }
 
