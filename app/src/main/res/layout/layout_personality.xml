@@ -22,12 +22,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
-            <android.support.constraint.Guideline
-                android:id="@+id/guideline"
-                android:layout_width="1dp"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.5" />
+
 
             <ImageView
                 android:id="@+id/imageView2"

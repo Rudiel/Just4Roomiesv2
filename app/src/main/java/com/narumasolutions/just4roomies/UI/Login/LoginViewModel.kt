@@ -61,7 +61,7 @@ class LoginViewModel : BaseViewModel() {
         response.value = userResponse.Code
     }*/
     fun onRetriveLoginSucces(responseBody: ResponseBody){
-       responseBody.byteStream()
+       response.value = 200
    }
 
     fun onRetriveLoginError(throwable: Throwable) {

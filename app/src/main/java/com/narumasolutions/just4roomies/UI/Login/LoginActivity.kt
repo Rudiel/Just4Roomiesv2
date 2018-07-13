@@ -3,6 +3,7 @@ package com.narumasolutions.just4roomies.UI.Login;
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +13,7 @@ import com.narumasolutions.just4roomies.Creators.AlertDialog
 import com.narumasolutions.just4roomies.Model.Request.User
 
 import com.narumasolutions.just4roomies.R;
+import com.narumasolutions.just4roomies.UI.Container.ContainerActivity
 import com.narumasolutions.just4roomies.databinding.LayoutLoginSesionBinding
 import kotlinx.android.synthetic.main.layout_login_sesion.*
 
@@ -30,7 +32,7 @@ class LoginActivity : AppCompatActivity() {
         viewModel = ViewModelProviders.of(this).get(LoginViewModel::class.java)
 
         viewModel.response.observe(this, Observer { response ->
-            if (response == 400) openMainActivity() else response?.let { showErrorDialog(it) }
+            if (response == 200) openMainActivity() else response?.let { showErrorDialog(it) }
         })
 
         binding.loginViewModel = viewModel
@@ -72,7 +74,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun openMainActivity() {
-        finish()
+        startActivity(Intent(this@LoginActivity, ContainerActivity::class.java))
     }
 
 }

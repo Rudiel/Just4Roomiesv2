@@ -1,6 +1,7 @@
 package com.narumasolutions.just4roomies
 
 import com.narumasolutions.just4roomies.Model.Request.RegisterNew
+import com.narumasolutions.just4roomies.Model.Request.Room
 import com.narumasolutions.just4roomies.Model.Request.User
 import com.narumasolutions.just4roomies.Model.Response.UserResponse
 import io.reactivex.Observable
@@ -20,7 +21,10 @@ interface Just4RoomiesServices {
     @GET("/api/GetUsers")
     fun getUsers(): Observable<List<User>>
 
-    @POST("Register")
+    @POST("api/Register")
     fun doRegister(@Body registerNew: RegisterNew): Observable<UserResponse>
+
+    @POST("api/SaveRoom")
+    fun saveRoom(@Body room: Room): Observable<ResponseBody>
 
 }
