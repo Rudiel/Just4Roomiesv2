@@ -1,5 +1,6 @@
 package com.narumasolutions.just4roomies.UI.Login;
 
+import android.app.Dialog
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
@@ -8,8 +9,10 @@ import android.databinding.DataBindingUtil
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Patterns
+import android.view.View
 import android.view.WindowManager;
 import com.narumasolutions.just4roomies.Creators.AlertDialog
+import com.narumasolutions.just4roomies.Creators.LoadingDialog
 import com.narumasolutions.just4roomies.Model.Request.User
 
 import com.narumasolutions.just4roomies.R;
@@ -20,6 +23,8 @@ import kotlinx.android.synthetic.main.layout_login_sesion.*
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var viewModel: LoginViewModel
+
+    private var loading: Dialog? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,6 +40,8 @@ class LoginActivity : AppCompatActivity() {
             if (response == 200) openMainActivity() else response?.let { showErrorDialog(it) }
         })
 
+        viewModel.loadingVisibility.observe(this, Observer { visibility -> if(visibility== View.VISIBLE) showLoading() else  hideLoading()})
+
         binding.loginViewModel = viewModel
 
         binding.setLifecycleOwner(this)
@@ -42,6 +49,10 @@ class LoginActivity : AppCompatActivity() {
         btLogin.setOnClickListener({
             validateFields()
         })
+
+        loading = LoadingDialog().showLoadingDialog(this, "Iniciando Sesion")
+
+
 
 
     }
@@ -75,6 +86,14 @@ class LoginActivity : AppCompatActivity() {
 
     fun openMainActivity() {
         startActivity(Intent(this@LoginActivity, ContainerActivity::class.java))
+    }
+
+    fun showLoading(){
+      //  loading?.show()
+    }
+
+    fun hideLoading(){
+        //loading?.hide()
     }
 
 }

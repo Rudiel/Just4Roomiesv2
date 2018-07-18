@@ -3,23 +3,22 @@ package com.narumasolutions.just4roomies
 import com.narumasolutions.just4roomies.Model.Request.RegisterNew
 import com.narumasolutions.just4roomies.Model.Request.Room
 import com.narumasolutions.just4roomies.Model.Request.User
+import com.narumasolutions.just4roomies.Model.Response.GetProfilesResponse
+import com.narumasolutions.just4roomies.Model.Response.Roomie
 import com.narumasolutions.just4roomies.Model.Response.UserResponse
 import io.reactivex.Observable
 import okhttp3.Response
 import okhttp3.ResponseBody
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.Headers
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface Just4RoomiesServices {
 
 
-    @POST("api/Login")
+    @POST("api/LoginUsuario")
     fun login(@Body user: User): Observable<ResponseBody>
 
-    @GET("/api/GetUsers")
-    fun getUsers(): Observable<List<User>>
+    @GET("/api/GetProfiles/Page")
+    fun getUsers(@QueryMap params: Map<String, Int>): Observable<GetProfilesResponse>
 
     @POST("api/Register")
     fun doRegister(@Body registerNew: RegisterNew): Observable<UserResponse>

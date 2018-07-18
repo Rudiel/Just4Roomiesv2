@@ -29,7 +29,7 @@ class MainActivityViewModel : BaseViewModel() {
 
     private fun getRoomies() {
 
-        subscription = service.getUsers()
+      /*  subscription = service.getUsers()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { onRetriveRoomiesListStart() }
@@ -37,7 +37,7 @@ class MainActivityViewModel : BaseViewModel() {
                 .subscribe(
                         { result -> onRetriveRoomiesListSucces(result) },
                         { onRetriveRoomiesListError() }
-                )
+                )*/
 
     }
 

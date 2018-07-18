@@ -1,6 +1,7 @@
 package com.narumasolutions.just4roomies.UI.Login
 
 import android.arch.lifecycle.MutableLiveData
+import android.view.View
 import com.narumasolutions.just4roomies.Just4RoomiesServices
 import com.narumasolutions.just4roomies.Model.Request.User
 import com.narumasolutions.just4roomies.Model.Response.UserResponse
@@ -21,6 +22,9 @@ class LoginViewModel : BaseViewModel() {
     val response: MutableLiveData<Int> = MutableLiveData()
     val navigateToMain = MutableLiveData<Event<String>>()
 
+    val loadingVisibility: MutableLiveData<Int> = MutableLiveData()
+
+
 
     private var subscription: Disposable? = null
 
@@ -39,7 +43,7 @@ class LoginViewModel : BaseViewModel() {
                 .doOnTerminate { onRetriveLoginFinish() }
                 .subscribe(
                         { onRetriveLoginSucces(it) },
-                        { it.cause?.let { it1 -> onRetriveLoginError(it1) } }
+                        { onRetriveLoginError(it) }
                 )
     }
 
@@ -50,22 +54,23 @@ class LoginViewModel : BaseViewModel() {
     }
 
     fun onRetriveLoginFinish() {
-
+        loadingVisibility.value = View.GONE
     }
 
     fun onRetriveLoginStart() {
-
+        loadingVisibility.value = View.VISIBLE
     }
 
    /* fun onRetriveLoginSucces(userResponse: UserResponse) {
         response.value = userResponse.Code
     }*/
     fun onRetriveLoginSucces(responseBody: ResponseBody){
+       responseBody.bytes()
        response.value = 200
    }
 
     fun onRetriveLoginError(throwable: Throwable) {
-        response.value = 500
+        response.value = 400
     }
 
 }

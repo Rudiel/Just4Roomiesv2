@@ -9,7 +9,7 @@ class LoadingDialog{
 
     fun showLoadingDialog(context : Context, message: String): Dialog{
 
-        val dialog = Dialog(context)
+        val dialog = Dialog(context,android.R.style.Theme_NoTitleBar_Fullscreen)
         dialog.window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT)
         dialog.setContentView(R.layout.layout_loading)
 

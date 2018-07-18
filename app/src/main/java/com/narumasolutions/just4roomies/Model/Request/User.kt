@@ -5,4 +5,4 @@ import android.text.TextUtils
 import android.util.Patterns
 
 
-data class User(val Usuario: String, val Password: String) :BaseObservable()
+data class User(val Email: String, val Contrasenia: String) :BaseObservable()
