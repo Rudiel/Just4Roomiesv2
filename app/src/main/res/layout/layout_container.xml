@@ -27,45 +27,56 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    >
+                    android:layout_height="match_parent">
 
                     <ImageView
                         android:layout_width="150dp"
                         android:layout_height="150dp"
-                        android:paddingRight="60dp"
                         android:layout_centerInParent="true"
+                        android:paddingRight="60dp"
                         android:src="@drawable/logo_app_just"
                         android:visibility="visible" />
 
                     <ImageView
                         android:id="@+id/ivFilter"
-                        android:visibility="gone"
                         android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:layout_height="wrap_content"
-                        android:src="@android:drawable/ic_menu_camera"/>
+                        android:src="@android:drawable/ic_menu_camera"
+                        android:visibility="gone" />
                 </RelativeLayout>
 
             </android.support.v7.widget.Toolbar>
 
-          <!--  <android.support.design.widget.TabLayout
-                android:id="@+id/tabs"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:color/white"
-                app:tabGravity="fill"
-                app:tabMode="fixed" />-->
+            <!--  <android.support.design.widget.TabLayout
+                  android:id="@+id/tabs"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:background="@android:color/white"
+                  app:tabGravity="fill"
+                  app:tabMode="fixed" />-->
 
         </android.support.design.widget.AppBarLayout>
 
         <!-- main content view -->
+
+        <android.support.design.widget.BottomNavigationView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@color/colorAccent"
+            app:menu="@menu/menu_navigation" />
+
         <FrameLayout
             android:id="@+id/flContainer"
             android:layout_width="match_parent"
+            android:background="@color/gris_bajo"
+            android:layout_gravity="top"
             android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        </FrameLayout>
     </android.support.design.widget.CoordinatorLayout>
 
     <!-- The navigation drawer -->

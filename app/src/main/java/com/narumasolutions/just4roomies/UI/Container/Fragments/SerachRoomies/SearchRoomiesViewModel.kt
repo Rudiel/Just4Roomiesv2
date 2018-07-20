@@ -8,7 +8,6 @@ import com.narumasolutions.just4roomies.UI.BaseViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
-import okhttp3.ResponseBody
 import javax.inject.Inject
 
 class SearchRoomiesViewModel : BaseViewModel() {
@@ -18,7 +17,7 @@ class SearchRoomiesViewModel : BaseViewModel() {
 
     private var subscription: Disposable? = null
 
-    val response: MutableLiveData<Int> = MutableLiveData()
+    val response: MutableLiveData<List<Roomie>> = MutableLiveData()
 
     init {
 
@@ -26,10 +25,10 @@ class SearchRoomiesViewModel : BaseViewModel() {
 
     fun getRoomies() {
 
-        val params = HashMap<String,Int>()
+        val params = HashMap<String, Int>()
 
-        params.set("start",1)
-        params.set("limit",10)
+        params.set("start", 1)
+        params.set("limit", 10)
 
 
         subscription = services.getUsers(params)
@@ -39,7 +38,7 @@ class SearchRoomiesViewModel : BaseViewModel() {
                 .doOnTerminate { onRetriveRoomiesFinish() }
                 .subscribe(
                         { result -> onRetriveRoomiesSucces(result) },
-                        {onRetriveRoomiesError(it)})
+                        { onRetriveRoomiesError(it) })
 
     }
 
@@ -52,16 +51,17 @@ class SearchRoomiesViewModel : BaseViewModel() {
     }
 
     fun onRetriveRoomiesError(throwable: Throwable) {
-            response.value=400
+
     }
 
     fun onRetriveRoomiesSucces(getProfilesResponse: GetProfilesResponse) {
-            getProfilesResponse.Roomies
-            response.value =200
+        response.value = getProfilesResponse.Roomies
     }
 
     /*fun onRetriveRoomiesSucces(response: ResponseBody){
             response.byteStream()
     }*/
+
+
 
 }

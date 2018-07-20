@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item
+        android:id="@+id/menu_buscarroomie"
+        android:checked="false"
+        android:icon="@android:drawable/ic_btn_speak_now"
+        android:title="@string/menu_buscarroomie" />
+
+    <item
+        android:id="@+id/menu_chats"
+        android:checked="false"
+        android:icon="@android:drawable/ic_btn_speak_now"
+        android:title="@string/menu_chats_conexiones" />
+
+    <item
+        android:id="@+id/menu_ofrecer"
+        android:checked="false"
+        android:icon="@android:drawable/ic_btn_speak_now"
+        android:title="@string/menu_ofrecerhabitacion" />
+
+</menu>
