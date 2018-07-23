@@ -126,5 +126,7 @@
     <string name="register_repitpass">Repetir Contraseña</string>
     <string name="register">Registrarse</string>
 
+    <string name="channelID">1</string>
+
 
 </resources>

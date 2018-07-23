@@ -11,7 +11,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
-import android.widget.Toolbar
 import com.narumasolutions.just4roomies.Model.Response.Roomie
 import com.narumasolutions.just4roomies.R
 import com.narumasolutions.just4roomies.databinding.LayoutFragmentSearchroomieBinding
@@ -60,7 +59,7 @@ class SearchRoomies_Fragment : Fragment() {
 
         try {
             flContainer.parent
-            paramsCardView.height = displayMetrics.heightPixels - (displayMetrics.heightPixels / 4 + 50)
+            paramsCardView.height = displayMetrics.heightPixels - (displayMetrics.heightPixels / 4 + 50) - (toolbar.height*2)
             paramsActions.height = displayMetrics.heightPixels - paramsCardView.height
             // paramsCardView.height = flContainer.measuredHeight -(toolbar.height *2) - (flContainer.measuredHeight/4 + 50)
             // paramsActions.height = flContainer.measuredHeight - paramsCardView.height

@@ -6,6 +6,8 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'kotlin-kapt'
 
+apply plugin: 'com.google.gms.google-services'
+
 android {
     compileSdkVersion 27
     defaultConfig {
@@ -85,6 +87,12 @@ dependencies {
 
     implementation 'com.daimajia.swipelayout:library:1.2.0@aar'
     implementation "com.yuyakaido.android:card-stack-view:1.0.0-beta9"
+
+    //Firebase
+    implementation 'com.google.firebase:firebase-core:16.0.1'
+
+    //Firebase FCM
+    implementation 'com.google.firebase:firebase-messaging:17.1.0'
 
 
 

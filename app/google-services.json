@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "845634836476",
+    "firebase_url": "https://just4roomies-test.firebaseio.com",
+    "project_id": "just4roomies-test",
+    "storage_bucket": "just4roomies-test.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:845634836476:android:ee4152338ba25878",
+        "android_client_info": {
+          "package_name": "com.narumasolutions.just4roomies"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "845634836476-hk3ieefclt7qiqhoqsm34aijv1qe2kcc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDInfkkvT3CpGlFm0ih3sZIQ8DfLefS040"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

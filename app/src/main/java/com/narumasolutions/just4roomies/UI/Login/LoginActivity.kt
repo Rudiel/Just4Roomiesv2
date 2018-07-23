@@ -2,15 +2,16 @@ package com.narumasolutions.just4roomies.UI.Login;
 
 import android.app.Dialog
 import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log
 import android.util.Patterns
 import android.view.View
 import android.view.WindowManager;
+import com.google.firebase.iid.FirebaseInstanceId
 import com.narumasolutions.just4roomies.Creators.AlertDialog
 import com.narumasolutions.just4roomies.Creators.LoadingDialog
 import com.narumasolutions.just4roomies.Model.Request.User
@@ -40,7 +41,7 @@ class LoginActivity : AppCompatActivity() {
             if (response == 200) openMainActivity() else response?.let { showErrorDialog(it) }
         })
 
-        viewModel.loadingVisibility.observe(this, Observer { visibility -> if(visibility== View.VISIBLE) showLoading() else  hideLoading()})
+        viewModel.loadingVisibility.observe(this, Observer { visibility -> if (visibility == View.VISIBLE) showLoading() else hideLoading() })
 
         binding.loginViewModel = viewModel
 
@@ -50,9 +51,10 @@ class LoginActivity : AppCompatActivity() {
             validateFields()
         })
 
-        loading = LoadingDialog().showLoadingDialog(this, "Iniciando Sesion")
+        loading = LoadingDialog().showLoadingDialog(this, "Iniciando Sesion..")
 
-
+        Log.d("ID", "" + FirebaseInstanceId.getInstance().getToken())
+       // Log.d("TOKEN",""+FirebaseInstanceId.getInstance().instanceId.result.token)
 
 
     }
@@ -70,17 +72,18 @@ class LoginActivity : AppCompatActivity() {
             else -> message = "Ocurrio un Error"
         }
 
-        AlertDialog().showDialog(this , message, getString(R.string.login_login)).show()
+        AlertDialog().showDialog(this, message, getString(R.string.login_login)).show()
 
     }
 
     private fun validateFields() {
         if (!Patterns.EMAIL_ADDRESS.matcher(etUsuario.text).matches())
             showErrorDialog(502)
-        else if (etPassword.text.isNullOrEmpty() or  (etPassword.text.length < 6))
+        else if (etPassword.text.isNullOrEmpty() or (etPassword.text.length < 6))
             showErrorDialog(503)
         else {
-            viewModel.doLogin(User(etUsuario.text.toString(),etPassword.text.toString()))
+            btLogin.isActivated= false
+            viewModel.doLogin(User(etUsuario.text.toString(), etPassword.text.toString()))
         }
     }
 
@@ -88,12 +91,13 @@ class LoginActivity : AppCompatActivity() {
         startActivity(Intent(this@LoginActivity, ContainerActivity::class.java))
     }
 
-    fun showLoading(){
-      //  loading?.show()
+    fun showLoading() {
+        loading?.show()
     }
 
-    fun hideLoading(){
-        //loading?.hide()
+    fun hideLoading() {
+        btLogin.isActivated= true
+        loading?.hide()
     }
 
 }
