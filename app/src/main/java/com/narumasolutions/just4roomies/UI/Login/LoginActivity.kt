@@ -15,6 +15,7 @@ import com.google.firebase.iid.FirebaseInstanceId
 import com.narumasolutions.just4roomies.Creators.AlertDialog
 import com.narumasolutions.just4roomies.Creators.LoadingDialog
 import com.narumasolutions.just4roomies.Model.Request.User
+import com.narumasolutions.just4roomies.Model.Response.ErrorResponse
 
 import com.narumasolutions.just4roomies.R;
 import com.narumasolutions.just4roomies.UI.Container.ContainerActivity
@@ -38,7 +39,11 @@ class LoginActivity : AppCompatActivity() {
         viewModel = ViewModelProviders.of(this).get(LoginViewModel::class.java)
 
         viewModel.response.observe(this, Observer { response ->
-            if (response == 200) openMainActivity() else response?.let { showErrorDialog(it) }
+            if (response != null) {
+                manageResponse(response)
+            }
+            else
+                showErrorDialog("Ocurrio un error intente de nuevo")
         })
 
         viewModel.loadingVisibility.observe(this, Observer { visibility -> if (visibility == View.VISIBLE) showLoading() else hideLoading() })
@@ -53,24 +58,24 @@ class LoginActivity : AppCompatActivity() {
 
         loading = LoadingDialog().showLoadingDialog(this, "Iniciando Sesion..")
 
-        Log.d("ID", "" + FirebaseInstanceId.getInstance().getToken())
+        val token=  FirebaseInstanceId.getInstance().getToken()
+        Log.d("ID_NOT", "" +token)
        // Log.d("TOKEN",""+FirebaseInstanceId.getInstance().instanceId.result.token)
 
 
     }
 
-    fun showErrorDialog(code: Int) {
-
-        var message = ""
-
-        when (code) {
-            500 -> message = "Bad Response"
-            501 -> message = ""
-            502 -> message = "Usuario no tiene el formato adecuado"
-            503 -> message = "Contraseña no valida"
-            401 -> message = "No esta autorizado"
-            else -> message = "Ocurrio un Error"
+    private fun manageResponse(responseBody : Any){
+        if(responseBody is ErrorResponse){
+            showErrorDialog(responseBody.message)
+        }else {
+            openMainActivity()
         }
+
+        Log.d("RESPONSE",responseBody.toString())
+    }
+
+    fun showErrorDialog(message: String) {
 
         AlertDialog().showDialog(this, message, getString(R.string.login_login)).show()
 
@@ -78,9 +83,9 @@ class LoginActivity : AppCompatActivity() {
 
     private fun validateFields() {
         if (!Patterns.EMAIL_ADDRESS.matcher(etUsuario.text).matches())
-            showErrorDialog(502)
+            showErrorDialog("Formato incorrecto")
         else if (etPassword.text.isNullOrEmpty() or (etPassword.text.length < 6))
-            showErrorDialog(503)
+            showErrorDialog("Password no valido")
         else {
             btLogin.isActivated= false
             viewModel.doLogin(User(etUsuario.text.toString(), etPassword.text.toString()))

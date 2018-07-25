@@ -9,13 +9,14 @@ import com.narumasolutions.just4roomies.Model.Response.UserResponse
 import io.reactivex.Observable
 import okhttp3.Response
 import okhttp3.ResponseBody
+import retrofit2.adapter.rxjava2.Result
 import retrofit2.http.*
 
 interface Just4RoomiesServices {
 
 
     @POST("api/LoginUsuario")
-    fun login(@Body user: User): Observable<ResponseBody>
+    fun login(@Body user: User): Observable<Result<ResponseBody>>
 
     @GET("/api/GetProfiles/Page")
     fun getUsers(@QueryMap params: Map<String, Int>): Observable<GetProfilesResponse>

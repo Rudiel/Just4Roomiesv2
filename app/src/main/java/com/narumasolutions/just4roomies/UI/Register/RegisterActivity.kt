@@ -25,11 +25,13 @@ import android.view.WindowManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.narumasolutions.just4roomies.Creators.AlertDialog
+import com.narumasolutions.just4roomies.Creators.IOnChooserImageListener
 import com.narumasolutions.just4roomies.Creators.LoadingDialog
 import com.narumasolutions.just4roomies.Model.Request.RegisterNew
 import com.narumasolutions.just4roomies.Model.Response.UserResponse
 import com.narumasolutions.just4roomies.R
 import com.narumasolutions.just4roomies.Utils.REQUEST_CAMERA
+import com.narumasolutions.just4roomies.Utils.REQUEST_GALERY
 import com.narumasolutions.just4roomies.databinding.LayoutRegisterBinding
 import kotlinx.android.synthetic.main.layout_register.*
 import java.io.ByteArrayOutputStream
@@ -38,7 +40,8 @@ import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 
-class RegisterActivity : AppCompatActivity() {
+class RegisterActivity : AppCompatActivity(), IOnChooserImageListener {
+
 
     private lateinit var viewModel: RegisterViewModel
     private lateinit var loading: Dialog
@@ -66,7 +69,7 @@ class RegisterActivity : AppCompatActivity() {
 
         btRegister.setOnClickListener({ validateFields() })
 
-        ivRegisterPhoto.setOnClickListener({ openCamera() })
+        ivRegisterPhoto.setOnClickListener({ selectImageOptions() })
 
         loading = LoadingDialog().showLoadingDialog(this, "Registrando tu usuario...")
 
@@ -77,6 +80,11 @@ class RegisterActivity : AppCompatActivity() {
         if (response.Code == 400)
             openMainActivity()
         else showErrorMessage(response.Message)
+    }
+
+    private fun selectImageOptions() {
+
+        AlertDialog().showImageOptionsDialog(this, this).show()
     }
 
     private fun validateFields() {
@@ -112,6 +120,23 @@ class RegisterActivity : AppCompatActivity() {
         } else
             cameraIntent()
 
+    }
+
+    private fun openGallery() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), REQUEST_GALERY)
+            }
+        }
+        else
+            galleryIntent()
+    }
+
+    private fun galleryIntent() {
+        val intent = Intent()
+        intent.type = "image/*"
+        intent.action = Intent.ACTION_GET_CONTENT
+        startActivityForResult(Intent.createChooser(intent, "Select File"), REQUEST_GALERY)
     }
 
     private fun cameraIntent() {
@@ -157,10 +182,14 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        when(requestCode){
+        when (requestCode) {
             REQUEST_CAMERA -> {
-                if((grantResults.isNotEmpty() && grantResults[0]==PackageManager.PERMISSION_GRANTED))
+                if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED))
                     cameraIntent()
+            }
+            REQUEST_GALERY -> {
+                if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED))
+                    galleryIntent()
             }
         }
     }
@@ -198,7 +227,14 @@ class RegisterActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (resultCode == Activity.RESULT_OK) {
-            onCaptureImageResult()
+            when (requestCode) {
+                REQUEST_GALERY -> {
+                    onGalleryResult(data)
+                }
+                REQUEST_CAMERA -> {
+                    onCaptureImageResult()
+                }
+            }
         }
     }
 
@@ -208,12 +244,32 @@ class RegisterActivity : AppCompatActivity() {
 
         val bOutput = ByteArrayOutputStream()
 
-        bitmap.compress(Bitmap.CompressFormat.JPEG,100,bOutput)
-
-        bOutput.toByteArray()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bOutput)
 
         Glide.with(this).load(bitmap).apply(RequestOptions.circleCropTransform()).into(ivRegisterPhoto)
 
+    }
+
+    fun onGalleryResult(data: Intent?) {
+        val bm: Bitmap?
+        try {
+            bm = MediaStore.Images.Media.getBitmap(this.applicationContext.contentResolver, data?.data)
+            Glide.with(this).load(bm).apply(RequestOptions.circleCropTransform()).into(ivRegisterPhoto)
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+
+
+    }
+
+    override fun onCameraClicked(dialog: Dialog) {
+        dialog.dismiss()
+        openCamera()
+    }
+
+    override fun onGalleryClicked(dialog: Dialog) {
+        dialog.dismiss()
+        openGallery()
     }
 
 

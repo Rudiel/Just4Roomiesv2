@@ -22,7 +22,6 @@
             android:id="@+id/llSearchRoomiesActions"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
             android:orientation="horizontal"
             android:gravity="center"
             app:layout_constraintBottom_toBottomOf="parent">

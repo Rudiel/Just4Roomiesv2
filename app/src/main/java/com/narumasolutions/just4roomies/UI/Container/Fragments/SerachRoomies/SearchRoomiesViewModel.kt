@@ -31,6 +31,7 @@ class SearchRoomiesViewModel : BaseViewModel() {
         params.set("limit", 10)
 
 
+
         subscription = services.getUsers(params)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

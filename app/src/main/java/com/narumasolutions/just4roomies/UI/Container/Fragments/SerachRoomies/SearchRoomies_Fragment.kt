@@ -34,6 +34,8 @@ class SearchRoomies_Fragment : Fragment() {
 
         binding.setLifecycleOwner(this)
 
+        view.measuredHeight
+
         return view
     }
 
@@ -56,10 +58,8 @@ class SearchRoomies_Fragment : Fragment() {
 
         val paramsActions = llSearchRoomiesActions.layoutParams
 
-
         try {
-            flContainer.parent
-            paramsCardView.height = displayMetrics.heightPixels - (displayMetrics.heightPixels / 4 + 50) - (toolbar.height*2)
+            paramsCardView.height = displayMetrics.heightPixels - (toolbar.height*2)- (displayMetrics.heightPixels / 4)
             paramsActions.height = displayMetrics.heightPixels - paramsCardView.height
             // paramsCardView.height = flContainer.measuredHeight -(toolbar.height *2) - (flContainer.measuredHeight/4 + 50)
             // paramsActions.height = flContainer.measuredHeight - paramsCardView.height
