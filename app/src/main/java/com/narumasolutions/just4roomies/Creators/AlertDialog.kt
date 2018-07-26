@@ -23,23 +23,23 @@ class AlertDialog {
     fun showImageOptionsDialog(context: Context, listener: IOnChooserImageListener): Dialog {
 
         val inflater = LayoutInflater.from(context)
-        val v = inflater.inflate(R.layout.layout_selector_image, null , false)
+        val v = inflater.inflate(R.layout.layout_selector_image, null, false)
 
-        val btGallery =v.findViewById<Button>(R.id.btImageSelectorGallery)
+        val btGallery = v.findViewById<Button>(R.id.btImageSelectorGallery)
 
-        val btCamera= v.findViewById<Button>(R.id.btImageSelectorCamera)
+        val btCamera = v.findViewById<Button>(R.id.btImageSelectorCamera)
 
 
         val alertDialog = AlertDialog.Builder(context, R.style.Theme_AppCompat_Light_Dialog_Alert)
         alertDialog.setView(v)
-        alertDialog.setTitle("Select Image Profile")
-        alertDialog.setMessage("Where do you like choose image from?")
+        alertDialog.setTitle(context.getString(R.string.crearusuario_alerttitle))
+        alertDialog.setMessage(context.getString(R.string.crearusuario_selectimagefrom))
 
         val dialog = alertDialog.create()
 
-        btCamera.setOnClickListener{listener.onCameraClicked(dialog)}
+        btCamera.setOnClickListener { listener.onCameraClicked(dialog) }
 
-        btGallery.setOnClickListener{listener.onGalleryClicked(dialog)}
+        btGallery.setOnClickListener { listener.onGalleryClicked(dialog) }
 
         return dialog
 

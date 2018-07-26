@@ -2,11 +2,16 @@ package com.narumasolutions.just4roomies.UI.RegisterPersonality
 
 import android.arch.lifecycle.MutableLiveData
 import android.view.View
+import com.google.gson.Gson
 import com.narumasolutions.just4roomies.Just4RoomiesServices
+import com.narumasolutions.just4roomies.Model.Request.CreatePersonality
+import com.narumasolutions.just4roomies.Model.Response.ErrorResponse
 import com.narumasolutions.just4roomies.UI.BaseViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import okhttp3.ResponseBody
+import retrofit2.Response
 import javax.inject.Inject
 
 class PersonalityViewModel : BaseViewModel() {
@@ -16,20 +21,12 @@ class PersonalityViewModel : BaseViewModel() {
 
     private var subscription: Disposable? = null
 
-    val response : MutableLiveData<Int> = MutableLiveData()
-    val registerClickListener = View.OnClickListener { doRgister() }
+    val response: MutableLiveData<Any> = MutableLiveData()
 
-    val nationClickListener = View.OnClickListener { showNationPicker()  }
-
-    val showCountryPicker : MutableLiveData<Boolean> = MutableLiveData()
+    val pbVisibility: MutableLiveData<Int> = MutableLiveData()
 
     init {
 
-
-    }
-
-    fun showNationPicker() {
-        showCountryPicker.value = true
     }
 
     override fun onCleared() {
@@ -37,26 +34,39 @@ class PersonalityViewModel : BaseViewModel() {
         subscription?.dispose()
     }
 
-    fun doRgister() {
+    fun registerPersonality(personality: CreatePersonality) {
 
-        /*subscription = services.login()
+        subscription = services.createPersonality(personality)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { onRetriveRegisterstart() }
                 .doOnTerminate { onRetriveRegisterFinish() }
                 .subscribe(
-                        { onRetriveRegisterSucces() },
+                        { result -> onRetriveRegisterSucces(result.response()) },
                         { onRetriveRegisterError() }
-                )*/
+                )
     }
 
-    fun onRetriveRegisterstart() {}
+    private fun onRetriveRegisterstart() {
+        pbVisibility.value = View.VISIBLE
+    }
 
-    fun onRetriveRegisterFinish() {}
+    private fun onRetriveRegisterFinish() {
+        pbVisibility.value = View.GONE
+    }
 
-    fun onRetriveRegisterSucces() {}
+    private fun onRetriveRegisterSucces(responseBody: Response<ResponseBody>?) {
+        if (responseBody?.code() == 200) {
+            this.response.value = responseBody
+        } else {
+            val errorResponse = Gson().fromJson(responseBody?.errorBody()?.string(), ErrorResponse::class.java)
+            this.response.value = errorResponse
+        }
+    }
 
-    fun onRetriveRegisterError() {}
+    private fun onRetriveRegisterError() {
+        this.response.value = null
+    }
 
 
 }

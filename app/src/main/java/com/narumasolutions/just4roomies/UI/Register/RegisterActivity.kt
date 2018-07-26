@@ -19,6 +19,7 @@ import android.provider.MediaStore
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.FileProvider
 import android.support.v7.app.AppCompatActivity
+import android.util.Patterns
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
@@ -28,8 +29,9 @@ import com.narumasolutions.just4roomies.Creators.AlertDialog
 import com.narumasolutions.just4roomies.Creators.IOnChooserImageListener
 import com.narumasolutions.just4roomies.Creators.LoadingDialog
 import com.narumasolutions.just4roomies.Model.Request.RegisterNew
-import com.narumasolutions.just4roomies.Model.Response.UserResponse
+import com.narumasolutions.just4roomies.Model.Response.ErrorResponse
 import com.narumasolutions.just4roomies.R
+import com.narumasolutions.just4roomies.UI.RegisterPersonality.PersonalityActivity
 import com.narumasolutions.just4roomies.Utils.REQUEST_CAMERA
 import com.narumasolutions.just4roomies.Utils.REQUEST_GALERY
 import com.narumasolutions.just4roomies.databinding.LayoutRegisterBinding
@@ -59,8 +61,10 @@ class RegisterActivity : AppCompatActivity(), IOnChooserImageListener {
 
         viewModel.response.observe(this, Observer { response ->
             if (response != null) {
-                showResponse(response)
-            }
+                manageResponse(response)
+            } else
+               // showErrorMessage("Ocurrió un error, intente de nuevo")
+                openRegisterActivity()
         })
 
         viewModel.pbVisibility.observe(this, Observer { response -> if (response == View.GONE) hideLoading() else showLoading() })
@@ -76,10 +80,13 @@ class RegisterActivity : AppCompatActivity(), IOnChooserImageListener {
 
     }
 
-    private fun showResponse(response: UserResponse) {
-        if (response.Code == 400)
-            openMainActivity()
-        else showErrorMessage(response.Message)
+    private fun manageResponse(responseBody: Any) {
+        if (responseBody is ErrorResponse) {
+            //showErrorMessage(responseBody.message)
+            openRegisterActivity()
+        } else {
+            openRegisterActivity()
+        }
     }
 
     private fun selectImageOptions() {
@@ -93,13 +100,15 @@ class RegisterActivity : AppCompatActivity(), IOnChooserImageListener {
             showErrorMessage("Nombre")
         else if (etLastName.text.toString().isEmpty())
             showErrorMessage("Apellido")
-        else if (etEmail.text.toString().isEmpty())
+        else if (!Patterns.EMAIL_ADDRESS.matcher(etEmail.text).matches())
             showErrorMessage("Email")
         else if (etPassword.text.toString().isEmpty())
             showErrorMessage("Password")
         else if (etRepitPassword.text.toString().isEmpty())
             showErrorMessage("RepitPassword")
-        else {
+        else if (ivRegisterPhoto.drawable.constantState == resources.getDrawable(android.R.drawable.ic_menu_camera).constantState) {
+            showErrorMessage("Image Empty")
+        } else {
             if (!etPassword.text.toString().equals(etRepitPassword.text.toString()))
                 showErrorMessage("Son diferentes")
             else
@@ -107,6 +116,7 @@ class RegisterActivity : AppCompatActivity(), IOnChooserImageListener {
                         etName.text.toString(),
                         etLastName.text.toString(),
                         etEmail.text.toString(),
+                        "test",
                         etPassword.text.toString()
                 ))
         }
@@ -127,8 +137,7 @@ class RegisterActivity : AppCompatActivity(), IOnChooserImageListener {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), REQUEST_GALERY)
             }
-        }
-        else
+        } else
             galleryIntent()
     }
 
@@ -211,7 +220,8 @@ class RegisterActivity : AppCompatActivity(), IOnChooserImageListener {
         AlertDialog().showDialog(this, message, getString(R.string.register)).show()
     }
 
-    private fun openMainActivity() {
+    private fun openRegisterActivity() {
+        startActivity(Intent(this@RegisterActivity, PersonalityActivity::class.java))
         finish()
     }
 

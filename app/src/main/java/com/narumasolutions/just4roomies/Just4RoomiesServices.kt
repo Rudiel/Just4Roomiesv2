@@ -1,5 +1,6 @@
 package com.narumasolutions.just4roomies
 
+import com.narumasolutions.just4roomies.Model.Request.CreatePersonality
 import com.narumasolutions.just4roomies.Model.Request.RegisterNew
 import com.narumasolutions.just4roomies.Model.Request.Room
 import com.narumasolutions.just4roomies.Model.Request.User
@@ -21,10 +22,13 @@ interface Just4RoomiesServices {
     @GET("/api/GetProfiles/Page")
     fun getUsers(@QueryMap params: Map<String, Int>): Observable<GetProfilesResponse>
 
-    @POST("api/Register")
-    fun doRegister(@Body registerNew: RegisterNew): Observable<UserResponse>
+    @POST("api/CreateProfile")
+    fun doRegister(@Body registerNew: RegisterNew): Observable<Result<ResponseBody>>
 
     @POST("api/SaveRoom")
     fun saveRoom(@Body room: Room): Observable<ResponseBody>
+
+    @POST("api/CreatePersonlaity")
+    fun createPersonality(@Body personality: CreatePersonality): Observable<Result<ResponseBody>>
 
 }

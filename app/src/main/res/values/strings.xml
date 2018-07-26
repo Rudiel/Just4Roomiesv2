@@ -128,5 +128,7 @@
 
     <string name="channelID">1</string>
 
+    <string name="crearusuario_alerttitle">Select Image Profile</string>
+    <string name="crearusuario_selectimagefrom">Where do you like choose image from?</string>
 
 </resources>
