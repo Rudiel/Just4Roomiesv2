@@ -8,6 +8,7 @@ import android.view.Menu
 import android.view.View
 import com.narumasolutions.just4roomies.R
 import com.narumasolutions.just4roomies.UI.Container.Fragments.EditProfile.EditProfile_Fragment
+import com.narumasolutions.just4roomies.UI.Container.Fragments.Matches.Matches_Fragment
 import com.narumasolutions.just4roomies.UI.Container.Fragments.Room.Room_Fragment
 import com.narumasolutions.just4roomies.UI.Container.Fragments.SerachRoomies.SearchRoomies_Fragment
 import kotlinx.android.synthetic.main.layout_container.*
@@ -69,6 +70,27 @@ class ContainerActivity : AppCompatActivity() {
                     true
                 }
             }
+        }
+
+        bnMenu.setOnNavigationItemSelectedListener {
+
+            ivFilter.visibility = View.GONE
+
+            when (it.itemId) {
+                R.id.bnChat -> {
+                    setFragment(Matches_Fragment(), false)
+                }
+
+                R.id.bnRoomies -> {
+                    ivFilter.visibility = View.VISIBLE
+                    setFragment(SearchRoomies_Fragment(), false)
+                }
+
+                R.id.bnOfrecer ->{
+                    setFragment(Room_Fragment(), false)
+                }
+            }
+            return@setOnNavigationItemSelectedListener true
         }
 
 

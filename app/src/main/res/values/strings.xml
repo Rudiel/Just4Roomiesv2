@@ -2,8 +2,7 @@
     <string name="app_name">Just4Roomies</string>
 
     <string name="facebook_app_id">1068183313241785</string>
-
-    <string name="fb_login_protocol_scheme">fb1236346466428793</string>
+    <string name="fb_login_protocol_scheme">fb1068183313241785</string>
 
     <string name="revisar_conexion">Por favor revisa tu conexión a internet e intenta nuevamente</string>
 
