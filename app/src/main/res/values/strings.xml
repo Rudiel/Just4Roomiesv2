@@ -59,6 +59,7 @@
     <string name="ofrecer_cuandoestara">¿Cuando estará disponible?</string>
     <string name="ofrecer_precio_hint">Precio</string>
     <string name="ofrecer_amueblado">Amueblado</string>
+    <string name="ofrecer_fecha">Seleccione Fecha</string>
     <string name="ofrecer_noamueblado">No Amueblado</string>
     <string name="ofrecer_alerta_titulo">Ofrecer Habitación</string>
     <string name="ofrecer_alerta_mensaje_bien">Habitación guardada con éxito</string>

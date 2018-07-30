@@ -7,10 +7,12 @@ import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.util.DisplayMetrics
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import com.daprlabs.cardstack.SwipeDeck
 import com.narumasolutions.just4roomies.Model.Response.Roomie
 import com.narumasolutions.just4roomies.R
 import com.narumasolutions.just4roomies.databinding.LayoutFragmentSearchroomieBinding
@@ -20,6 +22,7 @@ import kotlinx.android.synthetic.main.layout_fragment_searchroomie.*
 class SearchRoomies_Fragment : Fragment() {
 
     private lateinit var viewModel: SearchRoomiesViewModel
+    private lateinit var roomiesList: List<Roomie>
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -34,7 +37,6 @@ class SearchRoomies_Fragment : Fragment() {
 
         binding.setLifecycleOwner(this)
 
-        view.measuredHeight
 
         return view
     }
@@ -50,16 +52,40 @@ class SearchRoomies_Fragment : Fragment() {
 
     private fun init() {
 
+        sdRoomies.setEventCallback(object : SwipeDeck.SwipeEventCallback {
+
+            override fun cardSwipedLeft(position: Int) {
+
+            }
+
+            override fun cardSwipedRight(position: Int) {
+                sendRequest(roomiesList.get(position))
+            }
+
+
+            override fun cardActionUp() {
+            }
+
+            override fun cardsDepleted() {
+            }
+
+            override fun cardActionDown() {
+            }
+
+
+        })
+
+
         val displayMetrics = DisplayMetrics()
         val windowManager = activity?.getSystemService(Context.WINDOW_SERVICE) as WindowManager
         windowManager.defaultDisplay.getMetrics(displayMetrics)
 
-        val paramsCardView = csvRoomies.layoutParams
+        val paramsCardView = sflRoomies.layoutParams
 
         val paramsActions = llSearchRoomiesActions.layoutParams
 
         try {
-            paramsCardView.height = displayMetrics.heightPixels - (toolbar.height*2)- (displayMetrics.heightPixels / 4)
+            paramsCardView.height = displayMetrics.heightPixels - (toolbar.height * 2) - (displayMetrics.heightPixels / 4)
             paramsActions.height = displayMetrics.heightPixels - paramsCardView.height
             // paramsCardView.height = flContainer.measuredHeight -(toolbar.height *2) - (flContainer.measuredHeight/4 + 50)
             // paramsActions.height = flContainer.measuredHeight - paramsCardView.height
@@ -68,7 +94,7 @@ class SearchRoomies_Fragment : Fragment() {
         }
 
         llSearchRoomiesActions.layoutParams = paramsActions
-        csvRoomies.layoutParams = paramsCardView
+        sflRoomies.layoutParams = paramsCardView
 
 
     }
@@ -79,8 +105,13 @@ class SearchRoomies_Fragment : Fragment() {
     }
 
     private fun onRoomiesSucces(roomies: List<Roomie>) {
+        this.roomiesList = roomies
+        sdRoomies.setAdapter(RoomiesDeck_Adapter(activity!!.applicationContext, R.layout.layout_searchroomie_item, roomies))
+    }
 
-        csvRoomies.setAdapter(RoomiesDeck_Adapter(activity!!.applicationContext, R.layout.layout_searchroomie_item, roomies))
+
+    private fun sendRequest(roomie: Roomie) {
+        Log.d("Roomie", "" + roomie.Nombre)
     }
 
 }

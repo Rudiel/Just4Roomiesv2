@@ -86,7 +86,8 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
 
     implementation 'com.daimajia.swipelayout:library:1.2.0@aar'
-    implementation "com.yuyakaido.android:card-stack-view:1.0.0-beta9"
+    implementation 'com.daprlabs.aaron:cardstack:0.3.1-beta0'
+
 
     //Firebase
     implementation 'com.google.firebase:firebase-core:16.0.1'

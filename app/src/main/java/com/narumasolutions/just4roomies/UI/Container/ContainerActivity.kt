@@ -39,29 +39,12 @@ class ContainerActivity : AppCompatActivity() {
             ivFilter.visibility = View.GONE
             when (it.itemId) {
 
-                R.id.menu_buscarroomie -> {
-                    ivFilter.visibility = View.VISIBLE
-                    setFragment(SearchRoomies_Fragment(), false)
-                    closeSession()
-                    true
-                }
-
                 R.id.menu_ajustes -> {
                     closeSession()
                     true
                 }
                 R.id.menu_editarperfil -> {
                     setFragment(EditProfile_Fragment(), false)
-                    closeSession()
-                    true
-                }
-                R.id.menu_ofrecer -> {
-                    setFragment(Room_Fragment(), false)
-                    closeSession()
-                    true
-                }
-
-                R.id.menu_chats -> {
                     closeSession()
                     true
                 }
