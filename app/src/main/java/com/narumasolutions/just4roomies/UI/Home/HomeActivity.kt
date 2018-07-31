@@ -1,6 +1,7 @@
 package com.narumasolutions.just4roomies.UI.Home
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.renderscript.ScriptGroup
@@ -11,9 +12,13 @@ import com.facebook.FacebookException
 import com.facebook.login.LoginResult
 import com.narumasolutions.just4roomies.Creators.AlertDialog
 import com.narumasolutions.just4roomies.R
+import com.narumasolutions.just4roomies.UI.Container.ContainerActivity
 import com.narumasolutions.just4roomies.UI.Login.LoginActivity
 import com.narumasolutions.just4roomies.UI.Register.RegisterActivity
+import com.narumasolutions.just4roomies.Utils.PREF_USERID
+import com.narumasolutions.just4roomies.Utils.PreferenceHelper
 import kotlinx.android.synthetic.main.layout_login.*
+import com.narumasolutions.just4roomies.Utils.PreferenceHelper.get
 
 class HomeActivity : AppCompatActivity() {
 
@@ -22,10 +27,16 @@ class HomeActivity : AppCompatActivity() {
 
     private lateinit var callbackManager: CallbackManager
 
+    private lateinit var prefs: SharedPreferences
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        //checkLogin()
+        prefs = PreferenceHelper.defaultPrefs(this)
+
+        val userId: String? = prefs[PREF_USERID]
+        if (userId != "")
+            openActivityContainer()
 
         this.requestWindowFeature(android.view.Window.FEATURE_NO_TITLE)
         this.window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
@@ -67,6 +78,8 @@ class HomeActivity : AppCompatActivity() {
                 showErroDialog(error.toString())
             }
         })
+
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -76,12 +89,19 @@ class HomeActivity : AppCompatActivity() {
 
     private fun checkLogin() {
         val intent = Intent(this@HomeActivity, RegisterActivity::class.java)
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
         startActivity(intent)
         finish()
     }
 
     private fun showErroDialog(message: String) {
         AlertDialog().showDialog(this, message, "Facebook Login")
+    }
+
+    private fun openActivityContainer() {
+        val intent = Intent(this@HomeActivity, ContainerActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
+        finish()
     }
 }

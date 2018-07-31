@@ -58,8 +58,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@id/bnMenu"
+            android:background="@color/colorAccent"
             android:layout_marginBottom="110dp"
-            android:background="@color/gris_bajo"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         </FrameLayout>

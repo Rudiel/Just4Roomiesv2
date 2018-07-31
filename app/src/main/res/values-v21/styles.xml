@@ -1,4 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:datePickerDialogTheme">@style/MyDatePickerDialogTheme</item>
+        <item name="android:statusBarColor">@color/naranja_degradado</item>
+        <item name="android:colorPrimary">@color/naranja_degradado</item>
+        <item name="android:colorPrimaryDark">@color/naranja_degradado</item>
+        <item name="android:colorAccent">@color/naranja_degradado</item>
+        <item name="colorAccent">@color/naranja_degradado</item>
+    </style>
+
+
+    <style name="MyDatePickerDialogTheme" parent="android:Theme.Material.Light.Dialog">
+        <item name="android:datePickerStyle">@style/MyDatePickerStyle</item>
+        <item name="android:colorPrimary">@color/naranja_degradado</item>
+        <item name="android:colorPrimaryDark">@color/naranja_degradado</item>
+        <item name="android:colorAccent">@color/naranja_degradado</item>
+    </style>
+
+    <style name="MyDatePickerStyle" parent="@android:style/Widget.Material.Light.DatePicker">
+        <item name="android:headerBackground">@color/naranja_degradado</item>
+    </style>
+
+
 </resources>

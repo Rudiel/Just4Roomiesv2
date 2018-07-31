@@ -17,7 +17,7 @@ class ContainerActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        setTheme(R.style.AppTheme)
         setContentView(R.layout.layout_container)
 
         init()
@@ -45,7 +45,7 @@ class ContainerActivity : AppCompatActivity() {
                 }
                 R.id.menu_editarperfil -> {
                     setFragment(EditProfile_Fragment(), false)
-                    closeSession()
+                    bnMenu.isEnabled = false
                     true
                 }
                 else -> {

@@ -1,6 +1,7 @@
 package com.narumasolutions.just4roomies.UI.Container.Fragments.SerachRoomies
 
 import android.arch.lifecycle.MutableLiveData
+import android.view.View
 import com.narumasolutions.just4roomies.Just4RoomiesServices
 import com.narumasolutions.just4roomies.Model.Response.GetProfilesResponse
 import com.narumasolutions.just4roomies.Model.Response.Roomie
@@ -18,6 +19,8 @@ class SearchRoomiesViewModel : BaseViewModel() {
     private var subscription: Disposable? = null
 
     val response: MutableLiveData<List<Roomie>> = MutableLiveData()
+
+    val loadingVisibility: MutableLiveData<Int> = MutableLiveData()
 
     init {
 
@@ -43,26 +46,25 @@ class SearchRoomiesViewModel : BaseViewModel() {
 
     }
 
-    fun onRetriveRooomiesStart() {
+    private fun onRetriveRooomiesStart() {
+        loadingVisibility.value = View.VISIBLE
+    }
+
+    private fun onRetriveRoomiesFinish() {
+        loadingVisibility.value = View.GONE
+    }
+
+    private fun onRetriveRoomiesError(throwable: Throwable) {
 
     }
 
-    fun onRetriveRoomiesFinish() {
-
-    }
-
-    fun onRetriveRoomiesError(throwable: Throwable) {
-
-    }
-
-    fun onRetriveRoomiesSucces(getProfilesResponse: GetProfilesResponse) {
+    private fun onRetriveRoomiesSucces(getProfilesResponse: GetProfilesResponse) {
         response.value = getProfilesResponse.Roomies
     }
 
     /*fun onRetriveRoomiesSucces(response: ResponseBody){
             response.byteStream()
     }*/
-
 
 
 }

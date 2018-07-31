@@ -22,14 +22,37 @@ class LoadingDialog {
         window.setBackgroundDrawable(ColorDrawable(android.graphics.Color.TRANSPARENT))
         window.setBackgroundDrawableResource(R.color.naranja_degradado_transparente_dialog)
 
-        val params = window.getAttributes()
+        val params = window.attributes
         params.width = LinearLayout.LayoutParams.MATCH_PARENT
         params.height = LinearLayout.LayoutParams.MATCH_PARENT
 
-        dialog.getWindow().setAttributes(params as android.view.WindowManager.LayoutParams)
+        dialog.window.attributes = params as android.view.WindowManager.LayoutParams
 
         if (!message.isEmpty())
-                dialog.findViewById<TextView>(R.id.tvLoadingMessage).setText(message)
+            dialog.findViewById<TextView>(R.id.tvLoadingMessage).text = message
+
+        return dialog
+    }
+
+    fun showLoadingDialogTrans(context: Context, meesage: String): Dialog {
+
+
+        val dialog = Dialog(context)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.layout_loading_transparent)
+
+        val window = dialog.window
+
+        window.setBackgroundDrawable(ColorDrawable(android.graphics.Color.TRANSPARENT))
+        window.setBackgroundDrawableResource(R.color.transparent)
+
+        val params = window.attributes
+        params.width = LinearLayout.LayoutParams.MATCH_PARENT
+        params.height = LinearLayout.LayoutParams.MATCH_PARENT
+
+        dialog.window.attributes = params as android.view.WindowManager.LayoutParams
+        if (!meesage.isEmpty())
+            dialog.findViewById<TextView>(R.id.tvLoadinMessageTran).text = meesage
 
         return dialog
     }

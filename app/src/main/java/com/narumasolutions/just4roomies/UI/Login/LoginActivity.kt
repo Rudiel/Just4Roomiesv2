@@ -26,7 +26,7 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var viewModel: LoginViewModel
 
-    private var loading: Dialog? = null
+    private lateinit var loading: Dialog
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -97,12 +97,12 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun showLoading() {
-        loading?.show()
+        loading.show()
     }
 
     fun hideLoading() {
         btLogin.isActivated= true
-        loading?.hide()
+        loading.hide()
     }
 
 }

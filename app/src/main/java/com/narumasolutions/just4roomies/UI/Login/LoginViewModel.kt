@@ -33,9 +33,7 @@ class LoginViewModel : BaseViewModel() {
 
     init {
 
-
     }
-
 
     fun doLogin(user: User) {
 

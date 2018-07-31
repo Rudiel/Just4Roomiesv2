@@ -1,5 +1,6 @@
 package com.narumasolutions.just4roomies.UI.Container.Fragments.SerachRoomies
 
+import android.app.Dialog
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
@@ -13,6 +14,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import com.daprlabs.cardstack.SwipeDeck
+import com.narumasolutions.just4roomies.Creators.LoadingDialog
 import com.narumasolutions.just4roomies.Model.Response.Roomie
 import com.narumasolutions.just4roomies.R
 import com.narumasolutions.just4roomies.databinding.LayoutFragmentSearchroomieBinding
@@ -23,6 +25,7 @@ class SearchRoomies_Fragment : Fragment() {
 
     private lateinit var viewModel: SearchRoomiesViewModel
     private lateinit var roomiesList: List<Roomie>
+    private lateinit var loading: Dialog
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -32,6 +35,8 @@ class SearchRoomies_Fragment : Fragment() {
         viewModel = ViewModelProviders.of(this).get(SearchRoomiesViewModel::class.java)
 
         viewModel.response.observe(this, Observer { if (it != null) onRoomiesSucces(it) })
+
+        viewModel.loadingVisibility.observe(this, Observer { if (it == View.VISIBLE) showLoading() else hideLoading() })
 
         binding.searchViewModel = viewModel
 
@@ -48,6 +53,7 @@ class SearchRoomies_Fragment : Fragment() {
 
         getRoomies()
 
+        loading = LoadingDialog().showLoadingDialogTrans(context!!, "Obteniendo Roomies...")
     }
 
     private fun init() {
@@ -59,7 +65,7 @@ class SearchRoomies_Fragment : Fragment() {
             }
 
             override fun cardSwipedRight(position: Int) {
-                sendRequest(roomiesList.get(position))
+                sendRequest(roomiesList[position])
             }
 
 
@@ -107,11 +113,21 @@ class SearchRoomies_Fragment : Fragment() {
     private fun onRoomiesSucces(roomies: List<Roomie>) {
         this.roomiesList = roomies
         sdRoomies.setAdapter(RoomiesDeck_Adapter(activity!!.applicationContext, R.layout.layout_searchroomie_item, roomies))
+        llSearchRoomiesActions.visibility = View.VISIBLE
     }
 
 
     private fun sendRequest(roomie: Roomie) {
         Log.d("Roomie", "" + roomie.Nombre)
+    }
+
+
+    private fun showLoading() {
+        loading.show()
+    }
+
+    private fun hideLoading() {
+        loading.hide()
     }
 
 }

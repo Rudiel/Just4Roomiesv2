@@ -35,6 +35,12 @@ class Room_Fragment : Fragment() {
 
         btSaveRoom.setOnClickListener { validateFiels() }
 
+        ivOfrecer1.setOnClickListener {}
+
+        ivOfrecer2.setOnClickListener {}
+
+        ivOfrecer3.setOnClickListener {}
+
     }
 
     private fun validateFiels() {
@@ -44,7 +50,7 @@ class Room_Fragment : Fragment() {
         else if (btDate.text.toString().equals(resources.getString(R.string.ofrecer_fecha).toString()))
             showErrorMessage("Fecha de Disponibilidad Necesaria")
         else {
-            val room = Room("", "12/12/12", true, 12.1, 12.23, 12.23, "Test1", "Test2", "Test3")
+            val room = Room("", btDate.text.toString(), swAmueblado.isChecked, etPrice.text.toString().toDouble(), 12.23, 12.23, "Test1", "Test2", "Test3")
             viewModel.saveRoom(room)
         }
     }
