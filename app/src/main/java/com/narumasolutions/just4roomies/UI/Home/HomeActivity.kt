@@ -35,7 +35,7 @@ class HomeActivity : AppCompatActivity() {
         prefs = PreferenceHelper.defaultPrefs(this)
 
         val userId: String? = prefs[PREF_USERID]
-        if (userId != "")
+       // if (userId != "")
             openActivityContainer()
 
         this.requestWindowFeature(android.view.Window.FEATURE_NO_TITLE)

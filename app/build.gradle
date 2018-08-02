@@ -88,12 +88,17 @@ dependencies {
     implementation 'com.daimajia.swipelayout:library:1.2.0@aar'
     implementation 'com.daprlabs.aaron:cardstack:0.3.1-beta0'
 
-
     //Firebase
     implementation 'com.google.firebase:firebase-core:16.0.1'
 
     //Firebase FCM
     implementation 'com.google.firebase:firebase-messaging:17.1.0'
+
+    //SeekBar
+    implementation 'io.apptik.widget:multislider:1.3'
+
+
+
 
 
 

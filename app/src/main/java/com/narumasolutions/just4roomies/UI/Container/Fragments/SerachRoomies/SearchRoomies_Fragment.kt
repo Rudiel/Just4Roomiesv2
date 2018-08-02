@@ -13,7 +13,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.widget.ImageView
 import com.daprlabs.cardstack.SwipeDeck
+import com.narumasolutions.just4roomies.Creators.FiltersDialog
 import com.narumasolutions.just4roomies.Creators.LoadingDialog
 import com.narumasolutions.just4roomies.Model.Response.Roomie
 import com.narumasolutions.just4roomies.R
@@ -73,6 +75,9 @@ class SearchRoomies_Fragment : Fragment() {
             }
 
             override fun cardsDepleted() {
+                //Cuando se acaban las cards
+                llSearchRoomiesActions.visibility = View.INVISIBLE
+                clRoomiesEnd.visibility = View.VISIBLE
             }
 
             override fun cardActionDown() {
@@ -102,17 +107,32 @@ class SearchRoomies_Fragment : Fragment() {
         llSearchRoomiesActions.layoutParams = paramsActions
         sflRoomies.layoutParams = paramsCardView
 
+        sdRoomies.setLeftImage(R.id.left_image)
+        sdRoomies.setRightImage(R.id.right_image)
+
+        btSearchRoomieLike.setOnClickListener { sdRoomies.swipeTopCardRight(250) }
+
+        btSearchRoomieNope.setOnClickListener { sdRoomies.swipeTopCardLeft(250) }
+
+        btSearchRoomieRoom.setOnClickListener { openRoomDialog() }
+
+        btRoomiesEnd.setOnClickListener { getRoomies() }
+
+        val ivFilter=activity?.toolbar?.findViewById<ImageView>(R.id.ivFilter)
+        ivFilter?.setOnClickListener { showFilterDialog() }
 
     }
 
 
     private fun getRoomies() {
         viewModel.getRoomies()
+
     }
 
     private fun onRoomiesSucces(roomies: List<Roomie>) {
         this.roomiesList = roomies
         sdRoomies.setAdapter(RoomiesDeck_Adapter(activity!!.applicationContext, R.layout.layout_searchroomie_item, roomies))
+        clRoomiesEnd.visibility = View.GONE
         llSearchRoomiesActions.visibility = View.VISIBLE
     }
 
@@ -128,6 +148,15 @@ class SearchRoomies_Fragment : Fragment() {
 
     private fun hideLoading() {
         loading.hide()
+    }
+
+    private fun openRoomDialog() {
+
+    }
+
+    private fun showFilterDialog() {
+
+        FiltersDialog().showFiltersDialog(context!!).show()
     }
 
 }
