@@ -5,12 +5,14 @@ import android.support.v4.app.Fragment
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import com.narumasolutions.just4roomies.R
 import com.narumasolutions.just4roomies.UI.Container.Fragments.EditProfile.EditProfile_Fragment
 import com.narumasolutions.just4roomies.UI.Container.Fragments.Matches.Matches_Fragment
 import com.narumasolutions.just4roomies.UI.Container.Fragments.Room.Room_Fragment
 import com.narumasolutions.just4roomies.UI.Container.Fragments.SerachRoomies.SearchRoomies_Fragment
+import com.narumasolutions.just4roomies.UI.Container.Fragments.Settings.Settings_Fragment
 import kotlinx.android.synthetic.main.layout_container.*
 
 class ContainerActivity : AppCompatActivity() {
@@ -40,12 +42,13 @@ class ContainerActivity : AppCompatActivity() {
             when (it.itemId) {
 
                 R.id.menu_ajustes -> {
+                    setFragment(Settings_Fragment(),false)
                     closeSession()
                     true
                 }
                 R.id.menu_editarperfil -> {
                     setFragment(EditProfile_Fragment(), false)
-                    bnMenu.isEnabled = false
+                    clearSelectionBottom()
                     true
                 }
                 else -> {
@@ -88,6 +91,13 @@ class ContainerActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeButtonEnabled(true)
         mDrawerToggle.syncState()
+    }
+
+    private fun clearSelectionBottom(){
+        for (i in 0 until bnMenu.menu.size()){
+            val menuItem = bnMenu.menu.getItem(i)
+            menuItem.isChecked = false
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

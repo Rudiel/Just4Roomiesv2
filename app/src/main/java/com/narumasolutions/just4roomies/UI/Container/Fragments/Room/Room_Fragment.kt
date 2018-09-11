@@ -41,6 +41,7 @@ class Room_Fragment : Fragment() {
 
         ivOfrecer3.setOnClickListener {}
 
+
     }
 
     private fun validateFiels() {
@@ -57,7 +58,7 @@ class Room_Fragment : Fragment() {
 
     private fun showDatePicker() {
         val datePicker = DatePickerFragment()
-        datePicker.show(activity?.supportFragmentManager, "datePicker")
+        datePicker.show(activity?.supportFragmentManager, "datePickerRoom")
     }
 
     private fun showErrorMessage(message: String) {

@@ -28,6 +28,7 @@ class SearchRoomies_Fragment : Fragment() {
     private lateinit var viewModel: SearchRoomiesViewModel
     private lateinit var roomiesList: List<Roomie>
     private lateinit var loading: Dialog
+    private lateinit var currentRoomie: Roomie
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -62,12 +63,22 @@ class SearchRoomies_Fragment : Fragment() {
 
         sdRoomies.setEventCallback(object : SwipeDeck.SwipeEventCallback {
 
-            override fun cardSwipedLeft(position: Int) {
 
+            override fun cardSwipedLeft(position: Int) {
+                if (position + 1 < roomiesList.size) {
+                    currentRoomie = roomiesList[position + 1]
+                    checkHaveRoomAvailable()
+                }
             }
 
             override fun cardSwipedRight(position: Int) {
                 sendRequest(roomiesList[position])
+                if (position + 1 < roomiesList.size) {
+                    currentRoomie = roomiesList[position + 1]
+                    checkHaveRoomAvailable()
+                }
+
+
             }
 
 
@@ -118,7 +129,7 @@ class SearchRoomies_Fragment : Fragment() {
 
         btRoomiesEnd.setOnClickListener { getRoomies() }
 
-        val ivFilter=activity?.toolbar?.findViewById<ImageView>(R.id.ivFilter)
+        val ivFilter = activity?.toolbar?.findViewById<ImageView>(R.id.ivFilter)
         ivFilter?.setOnClickListener { showFilterDialog() }
 
     }
@@ -131,9 +142,10 @@ class SearchRoomies_Fragment : Fragment() {
 
     private fun onRoomiesSucces(roomies: List<Roomie>) {
         this.roomiesList = roomies
-        sdRoomies.setAdapter(RoomiesDeck_Adapter(activity!!.applicationContext, R.layout.layout_searchroomie_item, roomies))
+        sdRoomies.setAdapter(RoomiesDeck_Adapter(activity!!.applicationContext, R.layout.layout_searchroomie_item, roomiesList))
         clRoomiesEnd.visibility = View.GONE
         llSearchRoomiesActions.visibility = View.VISIBLE
+        currentRoomie = roomiesList[0]
     }
 
 
@@ -156,7 +168,11 @@ class SearchRoomies_Fragment : Fragment() {
 
     private fun showFilterDialog() {
 
-        FiltersDialog().showFiltersDialog(context!!).show()
+        FiltersDialog().showFiltersDialog(context!!, activity!!.supportFragmentManager).show()
+    }
+
+    private fun checkHaveRoomAvailable() {
+        btSearchRoomieRoom.isEnabled = currentRoomie.Room?.Id != null
     }
 
 }

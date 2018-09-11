@@ -4,6 +4,7 @@ import com.narumasolutions.just4roomies.Model.Request.CreatePersonality
 import com.narumasolutions.just4roomies.Model.Request.RegisterNew
 import com.narumasolutions.just4roomies.Model.Request.Room
 import com.narumasolutions.just4roomies.Model.Request.User
+import com.narumasolutions.just4roomies.Model.Response.Chat
 import com.narumasolutions.just4roomies.Model.Response.GetProfilesResponse
 import com.narumasolutions.just4roomies.Model.Response.Roomie
 import com.narumasolutions.just4roomies.Model.Response.UserResponse
@@ -30,5 +31,8 @@ interface Just4RoomiesServices {
 
     @POST("api/CreatePersonlaity")
     fun createPersonality(@Body personality: CreatePersonality): Observable<Result<ResponseBody>>
+
+    @GET("api/GetChat")
+    fun getChats(@QueryMap params: Map<String, String>): Observable<List<Chat>>
 
 }

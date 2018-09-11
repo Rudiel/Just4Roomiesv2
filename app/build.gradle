@@ -17,6 +17,8 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+
     }
     buildTypes {
         release {
@@ -97,6 +99,7 @@ dependencies {
     //SeekBar
     implementation 'io.apptik.widget:multislider:1.3'
 
+    implementation 'com.android.support:multidex:1.0.3'
 
 
 
